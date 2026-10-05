@@ -671,9 +671,11 @@ const waFormAltUrl = getWhatsAppUrl(
 
       // Si es válido, permitir que el navegador envíe el POST a Netlify
       if (submitBtn) {
-        submitBtn.disabled = true;
         submitBtn.setAttribute('aria-busy', 'true');
         submitBtn.textContent = 'Enviando consulta…';
+        setTimeout(() => {
+          submitBtn.disabled = true;
+        }, 0);
       }
     });
   }

@@ -9,13 +9,20 @@ export const BUSINESS = {
   personName: 'Gisella Suárez',
   tagline: 'Gestoría del automotor en Córdoba',
   slogan: 'Tu trámite automotor, claro y sin vueltas.',
-  phoneDisplay: '+54 9 351 375-0475',
-  phoneRaw: '5493513750475',
-  email: 'info.gestoriags@gmail.com',
-  instagram: '@gestoria.gs',
-  instagramUrl: 'https://instagram.com/gestoria.gs',
+  phoneDisplay:
+    (import.meta.env.PUBLIC_PHONE_DISPLAY as string) || '+54 9 351 375-0475',
+  phoneRaw: (import.meta.env.PUBLIC_PHONE_RAW as string) || '5493513750475',
+  email:
+    (import.meta.env.PUBLIC_CONTACT_EMAIL as string) ||
+    'info.gestoriags@gmail.com',
+  instagram:
+    (import.meta.env.PUBLIC_INSTAGRAM_HANDLE as string) || '@gestoria.gs',
+  instagramUrl:
+    (import.meta.env.PUBLIC_INSTAGRAM_URL as string) ||
+    'https://instagram.com/gestoria.gs',
   location: 'Córdoba, Argentina',
-  siteUrl: 'https://gestoriags.com.ar', // Dominio preliminar, configurable en producción
+  siteUrl:
+    (import.meta.env.PUBLIC_SITE_URL as string) || 'https://gestoriags.com.ar',
   metaDescription:
     'Gestoría del automotor en Córdoba. Transferencias, informes de dominio, verificación policial y trámites de autos y motos con atención personalizada y sin vueltas.',
   values: [
@@ -25,8 +32,8 @@ export const BUSINESS = {
     'Confianza',
     'Claridad',
     'Cercanía',
-  ],
-} as const;
+  ] as const,
+};
 
 /**
  * Genera el enlace directo a WhatsApp con mensaje contextual codificado

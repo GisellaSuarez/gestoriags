@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://gestoriags.com.ar',
+  site: process.env.PUBLIC_SITE_URL || 'https://gestoriags.com.ar',
   output: 'static',
   trailingSlash: 'always',
   integrations: [
