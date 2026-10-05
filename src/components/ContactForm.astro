@@ -54,15 +54,12 @@ const waFormAltUrl = getWhatsAppUrl(
       <form
         name="consulta-gestoria"
         method="POST"
-        action="/gracias/"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
+        action="/api/contacto"
         id="contact-form"
         class="form-body"
         novalidate
       >
-        <!-- Campos requeridos por Netlify Forms -->
-        <input type="hidden" name="form-name" value="consulta-gestoria" />
+        <!-- Campo trampa Honeypot para protección contra spam -->
         <p class="honeypot-field" style="display:none;" aria-hidden="true">
           <label>
             No completar este campo:{' '}
@@ -661,21 +658,81 @@ const waFormAltUrl = getWhatsAppUrl(
       });
     });
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
       const errs = validate();
       if (Object.keys(errs).length > 0) {
-        e.preventDefault();
         updateUi(errs, true);
         return;
       }
 
-      // Si es válido, permitir que el navegador envíe el POST a Netlify
+      const botField = form.querySelector(
+        '[name="bot-field"]'
+      ) as HTMLInputElement | null;
+      const msgField = form.querySelector(
+        '#f-msg'
+      ) as HTMLTextAreaElement | null;
+
+      const payload = {
+        nombre: fields.nombre.value.trim(),
+        telefono: fields.tel.value.trim(),
+        email: fields.email.value.trim(),
+        tramite: fields.tramite.value,
+        mensaje: msgField ? msgField.value.trim() : '',
+        privacidad: fields.priv.checked,
+        'bot-field': botField ? botField.value : '',
+      };
+
       if (submitBtn) {
+        submitBtn.disabled = true;
         submitBtn.setAttribute('aria-busy', 'true');
         submitBtn.textContent = 'Enviando consulta…';
-        setTimeout(() => {
-          submitBtn.disabled = true;
-        }, 0);
+      }
+
+      try {
+        const res = await fetch('/api/contacto', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          window.location.href = '/gracias/';
+          return;
+        }
+
+        const data = await res.json().catch(() => null);
+        const serverError =
+          data?.error ||
+          'Hubo un problema al enviar tu consulta. Por favor escribinos directamente por WhatsApp.';
+
+        if (summary && summaryList) {
+          summaryList.innerHTML = '';
+          const li = document.createElement('li');
+          li.textContent = serverError;
+          summaryList.appendChild(li);
+          summary.removeAttribute('hidden');
+          summary.focus();
+        }
+      } catch {
+        if (summary && summaryList) {
+          summaryList.innerHTML = '';
+          const li = document.createElement('li');
+          li.textContent =
+            'No se pudo conectar con el servidor. Revisá tu conexión o escribinos por WhatsApp.';
+          summaryList.appendChild(li);
+          summary.removeAttribute('hidden');
+          summary.focus();
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.removeAttribute('aria-busy');
+          submitBtn.textContent = 'Enviar consulta';
+        }
       }
     });
   }

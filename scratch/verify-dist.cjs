@@ -22,10 +22,7 @@ checkFile('dist/404.html', '404');
 // Form check in index.html
 const indexHtml = fs.readFileSync('dist/index.html', 'utf8');
 console.log('\n=== FORM IN INDEX ===');
-console.log('Form action="/gracias/":', indexHtml.includes('action="/gracias/"'));
-console.log('Form data-netlify="true":', indexHtml.includes('data-netlify="true"'));
-console.log('Form netlify-honeypot="bot-field":', indexHtml.includes('netlify-honeypot="bot-field"'));
-console.log('Hidden form-name="consulta-gestoria":', indexHtml.includes('name="form-name" value="consulta-gestoria"'));
+console.log('Form action="/api/contacto":', indexHtml.includes('action="/api/contacto"'));
 console.log('Honeypot input name="bot-field":', indexHtml.includes('name="bot-field"'));
 
 // Open graph check
