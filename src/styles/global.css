@@ -1,0 +1,124 @@
+@import '@fontsource-variable/manrope';
+@import '@fontsource/allura';
+@import './tokens.css';
+
+/* Reset y base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+/* Enlaces */
+a {
+  color: var(--blue);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--navy-800);
+}
+
+/* Foco accesible estricto WCAG */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--gold) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 3px var(--navy-800) !important;
+  border-radius: var(--r-sm);
+}
+
+/* Elementos de formulario */
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+/* Desplazamiento compensado para secciones con header pegajoso */
+section {
+  scroll-margin-top: var(--header-h);
+}
+
+/* Details y summary nativos */
+summary {
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] .gs-plus {
+  transform: rotate(45deg);
+}
+
+/* Clases utilitarias del diseño */
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.script-text {
+  font-family: var(--script);
+  font-weight: 400;
+  line-height: 0.8;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -80px;
+  z-index: 100;
+  background: var(--navy-900);
+  color: var(--paper);
+  padding: 12px 18px;
+  border-radius: var(--r-sm);
+  font-weight: 700;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+}

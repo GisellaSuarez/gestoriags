@@ -1,0 +1,131 @@
+---
+---
+
+<section aria-label="Cómo es la atención" class="trust-bar">
+  <div class="container">
+    <ul class="trust-list">
+      <li class="trust-item">
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+          class="trust-icon"
+        >
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path>
+        </svg>
+        <span class="trust-text">
+          <strong class="trust-title">Atención personalizada</strong>
+          <span class="trust-desc">Hablás siempre con Gisella.</span>
+        </span>
+      </li>
+
+      <li class="trust-item">
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+          class="trust-icon"
+        >
+          <path d="M3 12h4l3-7 4 14 3-7h4"></path>
+        </svg>
+        <span class="trust-text">
+          <strong class="trust-title">Seguimiento</strong>
+          <span class="trust-desc">Sabés en qué etapa está tu trámite.</span>
+        </span>
+      </li>
+
+      <li class="trust-item">
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+          class="trust-icon"
+        >
+          <path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"></path>
+          <path d="M8.5 12l2.5 2.5 4.5-5"></path>
+        </svg>
+        <span class="trust-text">
+          <strong class="trust-title">Gestión responsable</strong>
+          <span class="trust-desc">
+            Documentación revisada antes de presentar.
+          </span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .trust-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: #ffffff;
+  }
+
+  .trust-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 0;
+  }
+
+  .trust-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  @media (min-width: 768px) {
+    .trust-item {
+      padding: 28px 16px;
+      border-bottom: none;
+      border-right: 1px solid var(--border);
+    }
+    .trust-item:first-child {
+      padding-left: 0;
+    }
+    .trust-item:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+  }
+
+  .trust-icon {
+    flex: none;
+    margin-top: 2px;
+    color: var(--blue);
+  }
+
+  .trust-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .trust-title {
+    display: block;
+    font-size: 16px;
+    color: var(--navy-900);
+  }
+
+  .trust-desc {
+    font-size: 15px;
+    color: var(--text-2);
+  }
+</style>

@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getWhatsAppUrl } from '../config/business';
+
+const waFollowUpUrl = getWhatsAppUrl(
+  undefined,
+  'Hola Gisella, acabo de enviar una consulta en tu web y quería escribirte directamente.'
+);
+---
+
+<BaseLayout
+  title="¡Gracias por tu consulta! — Gestoría GS"
+  description="Confirmación de consulta recibida en Gestoría GS."
+  noindex={true}
+  hideFloatingWa={true}
+>
+  <main id="contenido" class="thanks-main">
+    <div class="container thanks-container">
+      <div class="thanks-card">
+        <span class="thanks-badge" aria-hidden="true">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path d="M5 12.5l4.5 4.5L19 7.5"></path>
+          </svg>
+        </span>
+
+        <h1 class="thanks-title">¡Gracias! Recibí tu consulta.</h1>
+        <p class="thanks-desc">
+          Te responderé a la brevedad por WhatsApp o por correo electrónico. Si
+          querés avanzar más rápido o tenés una urgencia con tu trámite, podés
+          escribirme directamente ahora mismo.
+        </p>
+
+        <div class="thanks-actions">
+          <a
+            href={waFollowUpUrl}
+            target="_blank"
+            rel="noopener"
+            class="btn-wa-thanks"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.3z"></path>
+              <path
+                d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2-1-1 .8a4.5 4.5 0 0 1-2.4-2.4l.8-1-1-2z"
+                fill="currentColor"
+                stroke="none"
+              ></path>
+            </svg>
+            Seguir por WhatsApp
+          </a>
+          <a href="/" class="btn-home-thanks">
+            Volver al inicio
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .thanks-main {
+    min-height: calc(100vh - var(--header-h) - 200px);
+    display: flex;
+    align-items: center;
+    padding: clamp(64px, 10vw, 120px) 0;
+  }
+
+  .thanks-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .thanks-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: clamp(32px, 5vw, 56px);
+    max-width: 640px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .thanks-badge {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--navy-900);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .thanks-title {
+    margin: 0;
+    font-size: clamp(2rem, 1.4rem + 2vw, 2.75rem);
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--navy-900);
+  }
+
+  .thanks-desc {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text-2);
+  }
+
+  .thanks-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+    width: 100%;
+  }
+
+  .btn-wa-thanks {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 52px;
+    padding: 0 24px;
+    border-radius: var(--r-pill);
+    background: var(--wa);
+    color: var(--navy-900);
+    font-weight: 800;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .btn-wa-thanks:hover {
+    background: var(--wa-hover);
+  }
+
+  .btn-home-thanks {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 24px;
+    border-radius: var(--r-pill);
+    border: 1.5px solid var(--navy-800);
+    color: var(--navy-800);
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .btn-home-thanks:hover {
+    background: var(--navy-800);
+    color: var(--paper);
+  }
+</style>

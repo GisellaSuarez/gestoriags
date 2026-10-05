@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Gestoría GS — Landing, sistema y handoff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Manrope:wght@400..800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EEF2F6;color:#111827;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#2E63A4;text-underline-offset:3px}
+a:hover{color:#0B2347}
+a:focus-visible,button:focus-visible{outline:3px solid #DFB04C;outline-offset:3px;box-shadow:0 0 0 3px #0B2347;border-radius:6px}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#EEF2F6;padding:0 0 120px">
+
+<header style="background:#07172F;color:#F8FAFC;padding:clamp(48px,8vw,96px) 0 clamp(40px,6vw,72px)">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:40px;align-items:flex-end;justify-content:space-between">
+    <div style="flex:1 1 560px;min-width:0">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:32px">
+        <img src="assets/gs-monograma.png" alt="" width="56" height="56" style="width:56px;height:56px;border-radius:50%;box-shadow:0 0 0 1px rgba(147,197,232,0.35)">
+        <span style="font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#93C5E8">Gisella Suárez · Gestoría GS</span>
+      </div>
+      <h1 style="margin:0;font-size:clamp(2.6rem,1.6rem + 4vw,5rem);line-height:1;font-weight:800;letter-spacing:-0.04em;text-wrap:balance">Landing de conversión, sistema y handoff.</h1>
+      <p style="margin:24px 0 0;max-width:40em;font-size:18px;line-height:1.6;color:#C9D6E4">Concepto “Ruta clara, trato humano”. Una sola página mobile-first que deriva a WhatsApp y, como segunda opción, a un formulario por email.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;flex:0 1 auto">
+      <a href="Landing Gestoria GS.dc.html" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:999px;background:#25D366;color:#07172F;font-weight:800;text-decoration:none">Abrir landing completa ↗</a>
+      <span style="font-size:13px;color:#93C5E8;text-align:center">Octubre 2026 · v1</span>
+    </div>
+  </div>
+  <nav aria-label="Índice" style="max-width:1320px;margin:48px auto 0;padding:0 clamp(20px,4vw,48px)">
+    <ol style="list-style:none;margin:0;padding:24px 0 0;border-top:1px solid rgba(147,197,232,0.25);display:flex;flex-wrap:wrap;gap:8px 28px;font-size:15px;font-weight:700">
+      <li><a href="#d1" style="color:#F8FAFC;text-decoration:none">01 Wireframe</a></li>
+      <li><a href="#d2" style="color:#F8FAFC;text-decoration:none">02 Dirección visual</a></li>
+      <li><a href="#d3" style="color:#F8FAFC;text-decoration:none">03 Tokens</a></li>
+      <li><a href="#d4" style="color:#F8FAFC;text-decoration:none">04 Componentes y estados</a></li>
+      <li><a href="#d5" style="color:#F8FAFC;text-decoration:none">05 Landing en 4 breakpoints</a></li>
+      <li><a href="#d6" style="color:#F8FAFC;text-decoration:none">06 Prototipo</a></li>
+      <li><a href="#d7" style="color:#F8FAFC;text-decoration:none">07 Handoff Astro/CSS</a></li>
+      <li><a href="#d8" style="color:#F8FAFC;text-decoration:none">08 Datos pendientes</a></li>
+    </ol>
+  </nav>
+</header>
+
+<section id="d1" style="max-width:1320px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(20px,4vw,48px) 0">
+  <p style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#2E63A4">01 · Wireframe mobile-first · 390 × 844</p>
+  <h2 style="margin:0 0 40px;font-size:clamp(1.9rem,1.3rem + 2vw,2.8rem);line-height:1.08;font-weight:800;letter-spacing:-0.03em;color:#07172F">Orden de lectura y rol de cada bloque.</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+    <div style="flex:none;width:300px;background:#FFFFFF;border:1px solid #DCE3EC;border-radius:24px;padding:14px;position:relative">
+      <div style="display:flex;flex-direction:column;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#526174">
+        <div style="height:34px;border:1px solid #DCE3EC;border-radius:6px;display:flex;align-items:center;justify-content:space-between;padding:0 8px"><span>● GS  Gisella</span><span>[wa] [menú]</span></div>
+        <div style="border:1px solid #DCE3EC;border-radius:6px;padding:10px;display:flex;flex-direction:column;gap:6px">
+          <span>eyebrow</span><span style="height:12px;background:#DCE3EC;border-radius:2px"></span><span style="height:12px;width:80%;background:#DCE3EC;border-radius:2px"></span><span style="height:6px;width:90%;background:#EEF2F6"></span><span style="height:6px;width:70%;background:#EEF2F6"></span>
+          <span style="height:22px;border-radius:999px;background:#25D366;color:#07172F;display:flex;align-items:center;justify-content:center;font-weight:600">Consultar por WhatsApp</span>
+          <span style="height:22px;border-radius:999px;border:1px solid #0B2347;display:flex;align-items:center;justify-content:center">Ver servicios</span>
+          <span>prueba · prueba · prueba</span>
+          <span style="height:120px;border-radius:4px 4px 4px 40px;background:#EEF2F6;display:flex;align-items:flex-end;padding:6px"><span style="width:26px;height:26px;border-radius:50%;background:#07172F"></span></span>
+        </div>
+        <div style="height:56px;border:1px solid #DCE3EC;border-radius:6px;display:flex;align-items:center;padding:0 8px">franja confianza ×3</div>
+        <div style="height:110px;border:1px solid #DCE3EC;border-radius:6px;padding:8px">servicios: 2 destacados + 6 en lista</div>
+        <div style="height:70px;border-radius:6px;background:#07172F;color:#93C5E8;padding:8px">beneficios ×5 (navy)</div>
+        <div style="height:80px;border:1px solid #DCE3EC;border-radius:6px;padding:8px">proceso ①②③ ← la ruta pasa por acá</div>
+        <div style="height:60px;border:1px solid #DCE3EC;border-radius:6px;padding:8px">sobre Gisella + foto + valores</div>
+        <div style="height:56px;border:1px solid #DCE3EC;border-radius:6px;padding:8px">FAQ ×7 (acordeón)</div>
+        <div style="height:90px;border:1px solid #DCE3EC;border-radius:6px;padding:8px">alt WhatsApp + formulario</div>
+        <div style="height:48px;border-radius:6px;background:#07172F;color:#93C5E8;padding:8px">CTA final ●</div>
+        <div style="height:34px;border-radius:6px;background:#020617;color:#93C5E8;padding:8px">footer</div>
+      </div>
+      <svg width="300" height="100%" style="position:absolute;inset:0;pointer-events:none" aria-hidden="true"><path d="M44 300 C44 330 8 330 8 360 L8 740" fill="none" stroke="#2E63A4" stroke-width="1.5" stroke-dasharray="3 4"></path></svg>
+    </div>
+    <ol style="flex:1 1 420px;min-width:0;margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:0 40px">
+      <li style="padding:16px 0;border-top:1px solid #DCE3EC"><strong style="color:#07172F">Header.</strong> <span style="color:#526174">Logo + WhatsApp siempre visible. Navegación por anchors detrás de “Menú” hasta 1024.</span></li>
+      <li style="padding:16px 0;border-top:1px solid #DCE3EC"><strong style="color:#07172F">Hero.</strong> <span style="color:#526174">Propuesta y CTA WhatsApp dentro del primer viewport de 390 × 844. La foto va debajo en mobile y a la izquierda en desktop.</span></li>
+      <li style="padding:16px 0;border-top:1px solid #DCE3EC"><strong style="color:#07172F">Franja de confianza.</strong> <span style="color:#526174">Tres atributos de atención, sin cifras ni sellos que no podamos respaldar.</span></li>
+      <li style="padding:16px 0;border-top:1px solid #DCE3EC"><strong style="color:#07172F">Servicios.</strong> <span style="color:#526174">Transferencia e informe de dominio destacados; los otros seis como lista editorial. Cada uno abre WhatsApp con el trámite precargado.</span></li>
+      <li style="padding:16px 0;border-top:1px solid #DCE3EC"><strong style="color:#07172F">Beneficios.</strong> <span style="color:#526174">Primer bloque navy: corta la página en dos y ordena la lectura.</span></li>
+      <li style="padding:16px 0;border-top:1px solid #DCE3EC"><strong style="color:#07172F">Proceso.</strong> <span style="color:#526174">La línea de ruta une los tres pasos. Es el momento en que el diseño “explica” cómo trabaja Gisella.</span></li>
+      <li style="padding:16px 0;border-top:1px solid #DCE3EC"><strong style="color:#07172F">Sobre Gisella.</strong> <span style="color:#526174">Segunda foto real, texto en primera persona y valores.</span></li>
+      <li style="padding:16px 0;border-top:1px solid #DCE3EC"><strong style="color:#07172F">FAQ.</strong> <span style="color:#526174">Responde objeciones de precio, plazo y documentación sin prometer resultados.</span></li>
+      <li style="padding:16px 0;border-top:1px solid #DCE3EC"><strong style="color:#07172F">Formulario.</strong> <span style="color:#526174">Alternativa por email; el CTA de WhatsApp sigue al lado.</span></li>
+      <li style="padding:16px 0;border-top:1px solid #DCE3EC"><strong style="color:#07172F">CTA final + footer.</strong> <span style="color:#526174">La ruta termina en el botón. El botón flotante se oculta en estas zonas.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section id="d2" style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0">
+  <p style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#2E63A4">02 · Dirección visual</p>
+  <h2 style="margin:0 0 40px;font-size:clamp(1.9rem,1.3rem + 2vw,2.8rem);line-height:1.08;font-weight:800;letter-spacing:-0.03em;color:#07172F">Ruta clara, trato humano.</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px">
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 10px;font-size:19px;font-weight:800;color:#07172F">Editorial, no flyer</h3>
+      <p style="margin:0;font-size:16px;line-height:1.6;color:#526174">Los flyers de Instagram usan fondos texturados, llaves y celulares de stock. En la web se reemplazan por grandes áreas claras, texto HTML y jerarquía tipográfica. Se conserva el navy de la marca y el tono directo (“Tomá nota”, “Recordá”) en el copy.</p>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 10px;font-size:19px;font-weight:800;color:#07172F">La línea de ruta</h3>
+      <p style="margin:0;font-size:16px;line-height:1.6;color:#526174">Nace en el monograma del hero, baja por el margen sin cruzar texto, atraviesa los tres pasos del proceso y termina con un punto dorado junto al CTA final. Se dibuja con el scroll; con reduced-motion aparece completa.</p>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 10px;font-size:19px;font-weight:800;color:#07172F">Fotografía real</h3>
+      <p style="margin:0;font-size:16px;line-height:1.6;color:#526174">Retrato sonriente en el hero (cercanía) y la foto en la Cámara en “Sobre mí” (seriedad). Las esquinas con curva grande repiten el trazo de la ruta.</p>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 10px;font-size:19px;font-weight:800;color:#07172F">Dorado puntual</h3>
+      <p style="margin:0;font-size:16px;line-height:1.6;color:#526174">Sólo en números sobre navy, la nota del informe de dominio, el punto final de la ruta y el anillo de foco. Nunca como texto sobre papel: no alcanza contraste.</p>
+    </div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:20px;margin-top:20px">
+    <img src="assets/gisella-retrato.jpg" alt="Retrato de Gisella usado en el hero" style="width:200px;height:250px;object-fit:cover;object-position:50% 12%;border-radius:6px 6px 6px 60px">
+    <img src="assets/gisella-camara.jpg" alt="Foto de Gisella en la Cámara usada en Sobre mí" style="width:250px;height:250px;object-fit:cover;border-radius:60px 6px 6px 6px">
+    <div style="width:250px;height:250px;border-radius:6px;background:#07172F;display:flex;align-items:center;justify-content:center"><img src="assets/gs-monograma.png" alt="Monograma GS" style="width:150px;height:150px;border-radius:50%"></div>
+    <div style="flex:1 1 260px;min-width:0;height:250px;border-radius:6px;background:#FFFFFF;border:1px solid #DCE3EC;padding:28px;display:flex;flex-direction:column;justify-content:space-between">
+      <span style="font-size:44px;font-weight:800;letter-spacing:-0.04em;line-height:1;color:#07172F">Manrope 800</span>
+      <span style="font-family:Allura,cursive;font-size:56px;line-height:1;color:#2E63A4">sin vueltas.</span>
+      <span style="font-size:15px;color:#526174">Allura aparece dos veces: H1 y cierre. El monograma se usa como imagen, nunca se recrea con fuente.</span>
+    </div>
+  </div>
+</section>
+
+<section id="d3" style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0">
+  <p style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#2E63A4">03 · Tokens</p>
+  <h2 style="margin:0 0 40px;font-size:clamp(1.9rem,1.3rem + 2vw,2.8rem);line-height:1.08;font-weight:800;letter-spacing:-0.03em;color:#07172F">Color, tipo, espacio y movimiento.</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px">
+    <sc-for list="{{ colors }}" as="c" hint-placeholder-count="12">
+      <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;overflow:hidden">
+        <div style="height:72px;background:{{ c.hex }};border-bottom:1px solid #DCE3EC"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <strong style="font-size:14px;color:#07172F">{{ c.name }}</strong>
+          <code style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#526174">{{ c.token }} · {{ c.hex }}</code>
+          <span style="font-size:13px;color:#526174;line-height:1.4">{{ c.use }}</span>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:20px;margin-top:20px">
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 16px;font-size:17px;font-weight:800;color:#07172F">Escala tipográfica (fluida)</h3>
+      <sc-for list="{{ type }}" as="t" hint-placeholder-count="7">
+        <div style="display:grid;grid-template-columns:110px 1fr;gap:12px;padding:10px 0;border-top:1px solid #DCE3EC;font-size:14px">
+          <code style="font-family:'JetBrains Mono',monospace;color:#2E63A4">{{ t.token }}</code>
+          <span style="color:#111827">{{ t.val }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 16px;font-size:17px;font-weight:800;color:#07172F">Espacio, forma, movimiento</h3>
+      <sc-for list="{{ misc }}" as="t" hint-placeholder-count="9">
+        <div style="display:grid;grid-template-columns:130px 1fr;gap:12px;padding:10px 0;border-top:1px solid #DCE3EC;font-size:14px">
+          <code style="font-family:'JetBrains Mono',monospace;color:#2E63A4">{{ t.token }}</code>
+          <span style="color:#111827">{{ t.val }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="margin-top:20px;background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+    <h3 style="margin:0 0 16px;font-size:17px;font-weight:800;color:#07172F">Pares de contraste verificados (WCAG 2.2 AA)</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px">
+      <sc-for list="{{ pairs }}" as="p" hint-placeholder-count="8">
+        <div style="display:flex;align-items:center;gap:12px;padding:10px;border:1px solid #DCE3EC;border-radius:6px">
+          <span style="width:44px;height:44px;flex:none;border-radius:6px;background:{{ p.bg }};color:{{ p.fg }};display:flex;align-items:center;justify-content:center;font-weight:800">Aa</span>
+          <span style="font-size:13px;line-height:1.4;color:#111827"><strong>{{ p.ratio }}</strong><br><span style="color:#526174">{{ p.label }}</span></span>
+        </div>
+      </sc-for>
+    </div>
+    <p style="margin:16px 0 0;font-size:14px;line-height:1.6;color:#526174">El verde #25D366 nunca lleva texto blanco (1,98:1); siempre tinta navy. El rojo de error #B42318 es un agregado necesario a la paleta y siempre va con ícono y texto.</p>
+  </div>
+</section>
+
+<section id="d4" style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0">
+  <p style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#2E63A4">04 · Componentes y estados</p>
+  <h2 style="margin:0 0 40px;font-size:clamp(1.9rem,1.3rem + 2vw,2.8rem);line-height:1.08;font-weight:800;letter-spacing:-0.03em;color:#07172F">Lo que se construye una vez y se reutiliza.</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:20px">
+
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 4px;font-size:17px;font-weight:800;color:#07172F">Botón WhatsApp (primario)</h3>
+      <p style="margin:0 0 20px;font-size:14px;color:#526174">Alto 56 hero / 48 interno / 44 header. Ícono + texto.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:16px 12px;align-items:flex-start">
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start"><span style="display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:999px;background:#25D366;color:#07172F;font-weight:800">Consultar por WhatsApp</span><code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#526174">default</code></div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start"><span style="display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:999px;background:#1FBE5B;color:#07172F;font-weight:800">Consultar por WhatsApp</span><code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#526174">hover #1FBE5B</code></div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start"><span style="display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:999px;background:#25D366;color:#07172F;font-weight:800;outline:3px solid #DFB04C;outline-offset:3px;box-shadow:0 0 0 3px #0B2347">Consultar por WhatsApp</span><code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#526174">focus-visible</code></div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 4px;font-size:17px;font-weight:800;color:#07172F">Secundario, enviar y enlace</h3>
+      <p style="margin:0 0 20px;font-size:14px;color:#526174">El botón de envío es navy para no competir con WhatsApp.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:16px 12px;align-items:flex-start">
+        <div style="display:flex;flex-direction:column;gap:6px"><span style="display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:999px;border:1.5px solid #0B2347;color:#0B2347;font-weight:700">Ver servicios</span><code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#526174">default</code></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><span style="display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:999px;background:#0B2347;color:#F8FAFC;font-weight:700">Ver servicios</span><code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#526174">hover</code></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><span style="display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:999px;background:#0B2347;color:#F8FAFC;font-weight:800;opacity:0.7">Enviando consulta…</span><code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#526174">enviando · disabled + aria-busy</code></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><span style="display:inline-flex;align-items:center;min-height:44px;font-weight:800;color:#0B2347;text-decoration:underline;text-underline-offset:3px">Consultar por este trámite →</span><code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#526174">enlace de servicio</code></div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 20px;font-size:17px;font-weight:800;color:#07172F">Campo de texto</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px">
+        <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:700;color:#07172F">Nombre <span style="color:#526174;font-weight:600">(obligatorio)</span></span><span style="height:52px;border-radius:6px;border:1.5px solid #526174"></span><code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#526174">default</code></div>
+        <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:700;color:#07172F">Nombre <span style="color:#526174;font-weight:600">(obligatorio)</span></span><span style="height:52px;border-radius:6px;border:1.5px solid #2E63A4;box-shadow:0 0 0 4px #93C5E8;display:flex;align-items:center;padding:0 14px;font-size:16px">Gis<span style="width:1.5px;height:20px;background:#111827"></span></span><code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#526174">focus</code></div>
+        <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:14px;font-weight:700;color:#07172F">WhatsApp o teléfono</span><span style="height:52px;border-radius:6px;border:1.5px solid #B42318;display:flex;align-items:center;padding:0 14px;font-size:16px">351 12</span><span style="display:flex;gap:6px;align-items:center;font-size:13px;font-weight:700;color:#B42318"><span style="width:16px;height:16px;border-radius:50%;background:#B42318;color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center">!</span>El número parece incompleto.</span><code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#526174">error · aria-invalid</code></div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 20px;font-size:17px;font-weight:800;color:#07172F">Resumen de errores y éxito</h3>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="padding:14px 16px;border-radius:6px;border:1.5px solid #B42318;background:#FEF3F2;color:#7A1A12;font-size:14px"><strong>Revisá 2 campo(s) para poder enviar:</strong><br><span style="text-decoration:underline">Escribí tu nombre.</span> · <span style="text-decoration:underline">Elegí el trámite.</span></div>
+        <div style="display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:6px;border:1px solid #DCE3EC"><span style="width:40px;height:40px;flex:none;border-radius:50%;background:#07172F;color:#DFB04C;display:flex;align-items:center;justify-content:center;font-weight:800">✓</span><span style="font-size:14px;color:#111827"><strong>¡Gracias! Recibí tu consulta.</strong><br><span style="color:#526174">+ “Seguir por WhatsApp” y “Enviar otra consulta”</span></span></div>
+        <p style="margin:0;font-size:13px;line-height:1.5;color:#526174">El resumen recibe foco al fallar el envío (role=alert, enlaces a cada campo). El título de éxito recibe foco al terminar (role=status).</p>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 20px;font-size:17px;font-weight:800;color:#07172F">FAQ (details/summary nativo)</h3>
+      <div style="border-top:1px solid #DCE3EC">
+        <div style="display:flex;justify-content:space-between;align-items:center;min-height:56px;border-bottom:1px solid #DCE3EC;font-weight:700;color:#07172F">¿Cuánto cuesta un trámite? <span style="color:#2E63A4;font-size:24px;font-weight:400">+</span></div>
+        <div style="border-bottom:1px solid #DCE3EC;padding-bottom:14px"><div style="display:flex;justify-content:space-between;align-items:center;min-height:56px;font-weight:700;color:#07172F">¿Cuánto tarda? <span style="color:#2E63A4;font-size:24px;font-weight:400;transform:rotate(45deg)">+</span></div><span style="font-size:14px;color:#526174">Los plazos dependen de cada trámite…</span></div>
+      </div>
+      <p style="margin:12px 0 0;font-size:13px;color:#526174">cerrado · abierto (el + rota a ×). Teclado: Tab + Enter/Espacio.</p>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 20px;font-size:17px;font-weight:800;color:#07172F">Botón flotante WhatsApp</h3>
+      <div style="display:flex;gap:20px;align-items:center">
+        <span style="width:60px;height:60px;flex:none;border-radius:50%;background:#25D366;box-shadow:0 8px 24px rgba(2,6,23,0.28);display:flex;align-items:center;justify-content:center;color:#07172F;font-weight:800">wa</span>
+        <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.6;color:#526174">
+          <li>Aparece cuando el CTA del hero sale de pantalla.</li>
+          <li>Se oculta si se ven Contacto, CTA final o footer (IntersectionObserver).</li>
+          <li>Oculto = visibility hidden + tabindex −1 + aria-hidden.</li>
+          <li>Respeta safe-area-inset-bottom.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 20px;font-size:17px;font-weight:800;color:#07172F">Bloque de servicio</h3>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="border:1px solid #DCE3EC;border-radius:6px;padding:20px"><span style="font-size:13px;font-weight:800;color:#2E63A4">01</span><strong style="display:block;font-size:20px;color:#07172F">Destacado</strong><span style="font-size:14px;color:#526174">Problema que resuelve · nota dorada opcional · enlace</span></div>
+        <div style="border-top:1px solid #DCE3EC;padding-top:14px"><span style="font-size:13px;font-weight:800;color:#2E63A4">03 </span><strong style="font-size:17px;color:#07172F">En lista</strong><br><span style="font-size:14px;color:#526174">Sin caja, separado por línea. Evita la grilla de cards idénticas.</span></div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 20px;font-size:17px;font-weight:800;color:#07172F">Header</h3>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;color:#526174">
+        <div style="display:flex;justify-content:space-between;align-items:center;height:52px;padding:0 12px;border:1px solid #DCE3EC;border-radius:6px"><span style="font-weight:800;color:#07172F">● Gisella Suárez</span><span>Servicios · Cómo trabajo · … · <span style="background:#25D366;color:#07172F;padding:4px 10px;border-radius:999px;font-weight:800">WhatsApp</span></span></div>
+        <span>≥ 1024: navegación completa</span>
+        <div style="display:flex;justify-content:space-between;align-items:center;height:52px;padding:0 12px;border:1px solid #DCE3EC;border-radius:6px"><span style="font-weight:800;color:#07172F">● Gisella Suárez</span><span style="display:flex;gap:6px"><span style="width:32px;height:32px;border-radius:50%;background:#25D366"></span><span style="border:1.5px solid #0B2347;color:#0B2347;border-radius:999px;padding:6px 10px;font-weight:700">Menú</span></span></div>
+        <span>&lt; 1024: WhatsApp + Menú (aria-expanded), panel con filas de 52 px</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="d5" style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0">
+  <p style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#2E63A4">05 · Landing high fidelity</p>
+  <h2 style="margin:0 0 12px;font-size:clamp(1.9rem,1.3rem + 2vw,2.8rem);line-height:1.08;font-weight:800;letter-spacing:-0.03em;color:#07172F">Cuatro breakpoints, un mismo archivo.</h2>
+  <p id="d6" style="margin:0 0 40px;max-width:46em;font-size:16px;line-height:1.6;color:#526174">06 · Prototipo: cada marco es la landing real y se puede scrollear. Probá el menú, los anchors, los enlaces de WhatsApp (abren wa.me con mensaje precargado) y el formulario completo: errores, enviando y éxito.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+    <figure style="margin:0;display:flex;flex-direction:column;gap:12px">
+      <div style="width:351px;height:760px;overflow:hidden;border-radius:28px;border:8px solid #07172F;background:#F8FAFC;box-sizing:content-box">
+        <iframe src="Landing Gestoria GS.dc.html" title="Landing en 390 px" style="width:390px;height:844px;border:0;transform:scale(0.9);transform-origin:0 0"></iframe>
+      </div>
+      <figcaption style="font-size:14px;font-weight:700;color:#07172F">390 × 844 · mobile <span style="font-weight:500;color:#526174">(base)</span></figcaption>
+    </figure>
+    <figure style="margin:0;display:flex;flex-direction:column;gap:12px">
+      <div style="width:553px;height:737px;overflow:hidden;border-radius:20px;border:8px solid #07172F;background:#F8FAFC;box-sizing:content-box">
+        <iframe src="Landing Gestoria GS.dc.html" title="Landing en 768 px" style="width:768px;height:1024px;border:0;transform:scale(0.72);transform-origin:0 0"></iframe>
+      </div>
+      <figcaption style="font-size:14px;font-weight:700;color:#07172F">768 × 1024 · tablet</figcaption>
+    </figure>
+    <figure style="margin:0;display:flex;flex-direction:column;gap:12px">
+      <div style="width:768px;height:576px;overflow:hidden;border-radius:12px;border:8px solid #07172F;background:#F8FAFC;box-sizing:content-box">
+        <iframe src="Landing Gestoria GS.dc.html" title="Landing en 1024 px" style="width:1024px;height:768px;border:0;transform:scale(0.75);transform-origin:0 0"></iframe>
+      </div>
+      <figcaption style="font-size:14px;font-weight:700;color:#07172F">1024 × 768 · laptop chica</figcaption>
+    </figure>
+    <figure style="margin:0;display:flex;flex-direction:column;gap:12px">
+      <div style="width:1152px;height:720px;overflow:hidden;border-radius:12px;border:8px solid #07172F;background:#F8FAFC;box-sizing:content-box">
+        <iframe src="Landing Gestoria GS.dc.html" title="Landing en 1440 px" style="width:1440px;height:900px;border:0;transform:scale(0.8);transform-origin:0 0"></iframe>
+      </div>
+      <figcaption style="font-size:14px;font-weight:700;color:#07172F">1440 × 900 · desktop</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="d7" style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0">
+  <p style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#2E63A4">07 · Handoff Astro / CSS</p>
+  <h2 style="margin:0 0 40px;font-size:clamp(1.9rem,1.3rem + 2vw,2.8rem);line-height:1.08;font-weight:800;letter-spacing:-0.03em;color:#07172F">Especificación para desarrollo.</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:20px">
+    <div style="background:#07172F;color:#C9D6E4;border-radius:6px;padding:28px;overflow:auto">
+      <h3 style="margin:0 0 16px;font-size:17px;font-weight:800;color:#F8FAFC">Estructura</h3>
+      <pre style="margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;white-space:pre">src/
+  layouts/Base.astro      head, fuentes, JSON-LD
+  pages/index.astro       arma las secciones
+  pages/privacidad.astro
+  components/
+    Header.astro          + menu.ts (aria-expanded)
+    Hero.astro
+    TrustStrip.astro
+    Services.astro        data/services.ts
+    Benefits.astro
+    Process.astro
+    About.astro
+    Faq.astro             details/summary, sin JS
+    ContactForm.astro     + form.ts
+    FinalCta.astro
+    Footer.astro
+    WaButton.astro        variant: hero|header|inline|fab
+    RouteLine.astro       + route.ts
+  styles/tokens.css  base.css
+  lib/wa.ts               waLink(tramite?)
+public/img/  gs-monograma.svg  gisella-*.avif</pre>
+    </div>
+    <div style="background:#07172F;color:#C9D6E4;border-radius:6px;padding:28px;overflow:auto">
+      <h3 style="margin:0 0 16px;font-size:17px;font-weight:800;color:#F8FAFC">tokens.css</h3>
+      <pre style="margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;white-space:pre">:root{
+  --navy-950:#020617; --navy-900:#07172F;
+  --navy-800:#0B2347; --blue:#2E63A4;
+  --sky:#93C5E8;  --gold:#DFB04C;
+  --paper:#F8FAFC; --border:#DCE3EC;
+  --text-2:#526174; --ink:#111827;
+  --wa:#25D366; --wa-hover:#1FBE5B;
+  --error:#B42318; --on-navy-2:#C9D6E4;
+  --font:"Manrope Variable",system-ui,sans-serif;
+  --script:"Allura",cursive;
+  --fs-h1:clamp(2.6rem,1.5rem + 4.4vw,4.9rem);
+  --fs-h2:clamp(2rem,1.3rem + 2.8vw,3.4rem);
+  --container:1200px;
+  --gutter:clamp(20px,5vw,64px);
+  --section-y:clamp(72px,10vw,128px);
+  --r-sm:6px; --r-pill:999px; --r-curve:140px;
+  --header-h:68px; --tap:44px;
+}
+section{scroll-margin-top:var(--header-h)}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}</pre>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 12px;font-size:17px;font-weight:800;color:#07172F">Breakpoints y layout</h3>
+      <ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.7;color:#526174">
+        <li>Base 390 (mobile-first). Layout fluido con flex-wrap y grid auto-fit; sólo dos cortes duros.</li>
+        <li><strong style="color:#111827">768:</strong> pasos del proceso en fila; la ruta baja por el margen derecho después del proceso.</li>
+        <li><strong style="color:#111827">1024:</strong> navegación completa en header.</li>
+        <li><strong style="color:#111827">1440:</strong> contenedor fijo de 1200 px centrado.</li>
+        <li>Hero: <code>flex-direction:row-reverse; flex-wrap:wrap</code> → texto primero en mobile, foto a la izquierda en desktop.</li>
+      </ul>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 12px;font-size:17px;font-weight:800;color:#07172F">RouteLine</h3>
+      <ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.7;color:#526174">
+        <li>SVG absoluto sobre <code>main</code>, <code>aria-hidden</code>, <code>pointer-events:none</code>.</li>
+        <li>Puntos: <code>[data-route=start]</code> → margen izq. → 3 × <code>[data-route=m]</code> → margen (der. ≥768) → <code>[data-route=end]</code>.</li>
+        <li>Curvas cúbicas con control vertical u horizontal según el tramo.</li>
+        <li>Recalcular con ResizeObserver y <code>document.fonts.ready</code>.</li>
+        <li>Progreso: <code>pathLength=1</code> + <code>stroke-dashoffset</code> en rAF. Reduced-motion: completa, sin listener.</li>
+        <li>Si falla JS, no se muestra: es decorativa.</li>
+      </ul>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 12px;font-size:17px;font-weight:800;color:#07172F">Formulario → email</h3>
+      <ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.7;color:#526174">
+        <li>Funciona sin JS (POST normal); JS agrega validación inline y estados.</li>
+        <li>Opción A: endpoint Astro (SSR/serverless) + proveedor transaccional. Opción B: servicio de formularios externo. A definir según hosting.</li>
+        <li>Destino: info.gestoriags@gmail.com. Asunto: “Consulta web — {trámite}”.</li>
+        <li>Antispam: honeypot oculto + límite por IP. Sin captcha visible.</li>
+        <li>No se piden DNI, patente, dominio ni adjuntos.</li>
+        <li>Validación: nombre requerido; teléfono ≥ 8 dígitos; email opcional con formato; trámite requerido; privacidad requerida.</li>
+      </ul>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 12px;font-size:17px;font-weight:800;color:#07172F">WhatsApp, SEO y medición</h3>
+      <ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.7;color:#526174">
+        <li><code>https://wa.me/5493513750475?text=…</code> con <code>encodeURIComponent</code>; mensaje por trámite.</li>
+        <li>Eventos por <code>data-track</code>: wa_header, wa_hero, wa_servicio, wa_form_alt, wa_final, wa_flotante, form_submit_ok/error.</li>
+        <li>Title y description con “gestoría del automotor Córdoba”. Un solo H1.</li>
+        <li>JSON-LD <code>ProfessionalService</code> con nombre, teléfono, email, sameAs Instagram. Sin dirección ni horarios hasta validar.</li>
+        <li>Open Graph con el retrato limpio.</li>
+      </ul>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 12px;font-size:17px;font-weight:800;color:#07172F">Rendimiento</h3>
+      <ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.7;color:#526174">
+        <li>Manrope Variable self-hosted (woff2, subset latin), preload. Allura subset sólo con los glifos usados.</li>
+        <li>Imágenes con <code>astro:assets</code> → AVIF/WebP, <code>srcset</code>, retrato del hero con <code>fetchpriority=high</code>, resto lazy.</li>
+        <li>JS total objetivo &lt; 10 KB: menú, form, flotante, ruta.</li>
+        <li>Objetivo: LCP &lt; 2,5 s en 4G, CLS ≈ 0 (width/height en todas las imágenes).</li>
+      </ul>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DCE3EC;border-radius:6px;padding:28px">
+      <h3 style="margin:0 0 12px;font-size:17px;font-weight:800;color:#07172F">Accesibilidad (checklist)</h3>
+      <ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.7;color:#526174">
+        <li>Skip link, landmarks (header, nav, main, footer), un H1 y H2 por sección.</li>
+        <li>Foco visible: anillo dorado 3 px + halo navy, funciona en papel y navy.</li>
+        <li>Targets ≥ 44 × 44 (botones 48–60).</li>
+        <li>Labels visibles, “(obligatorio)” en texto, errores con ícono + texto + aria-invalid + aria-describedby.</li>
+        <li>Estados no dependen sólo del color.</li>
+        <li>Flotante oculto fuera del orden de tabulación.</li>
+        <li>prefers-reduced-motion: sin smooth scroll ni dibujo progresivo.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="d8" style="max-width:1320px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px) 0">
+  <p style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#2E63A4">08 · Datos pendientes</p>
+  <h2 style="margin:0 0 40px;font-size:clamp(1.9rem,1.3rem + 2vw,2.8rem);line-height:1.08;font-weight:800;letter-spacing:-0.03em;color:#07172F">Lo que hay que confirmar antes de publicar.</h2>
+  <ol style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:0 40px;counter-reset:p">
+    <sc-for list="{{ pending }}" as="p" hint-placeholder-count="12">
+      <li style="display:grid;grid-template-columns:36px 1fr;gap:12px;padding:18px 0;border-top:1px solid #DCE3EC">
+        <span style="font-weight:800;color:#2E63A4;font-variant-numeric:tabular-nums">{{ p.n }}</span>
+        <span><strong style="display:block;color:#07172F;font-size:16px">{{ p.t }}</strong><span style="display:block;margin-top:4px;font-size:15px;line-height:1.55;color:#526174">{{ p.d }}</span></span>
+      </li>
+    </sc-for>
+  </ol>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const colors = [
+      ['Navy 950', '--navy-950', '#020617', 'Footer'],
+      ['Navy 900', '--navy-900', '#07172F', 'Bloques oscuros, títulos'],
+      ['Navy 800', '--navy-800', '#0B2347', 'Botón secundario, enviar'],
+      ['Azul', '--blue', '#2E63A4', 'Eyebrows, enlaces, ruta'],
+      ['Celeste', '--sky', '#93C5E8', 'Texto acento sobre navy, halo de foco'],
+      ['Dorado', '--gold', '#DFB04C', 'Uso puntual: números, punto final, foco'],
+      ['Papel', '--paper', '#F8FAFC', 'Fondo principal'],
+      ['Bordes', '--border', '#DCE3EC', 'Divisores y cajas'],
+      ['Texto secundario', '--text-2', '#526174', 'Cuerpo secundario, borde de inputs'],
+      ['Tinta', '--ink', '#111827', 'Texto principal'],
+      ['WhatsApp', '--wa', '#25D366', 'Sólo CTAs de WhatsApp'],
+      ['Error (agregado)', '--error', '#B42318', 'Validación del formulario']
+    ].map(([name, token, hex, use]) => ({ name, token, hex, use }));
+    const type = [
+      ['h1', 'Manrope 800 · clamp(2.6rem → 4.9rem) · lh 1.02 · ls −0.04em'],
+      ['h2', 'Manrope 800 · clamp(2rem → 3.4rem) · lh 1.05 · ls −0.035em'],
+      ['h3-lg', 'Manrope 800 · clamp(1.5rem → 2rem) · lh 1.15'],
+      ['h3', 'Manrope 800 · 21–22px · lh 1.25'],
+      ['body-lg', 'Manrope 400 · 17–20px · lh 1.6'],
+      ['body', 'Manrope 400 · 16px · lh 1.6 (mín. 14px en metadatos)'],
+      ['eyebrow', 'Manrope 700 · 13px · mayúsculas · ls 0.14em'],
+      ['script', 'Allura 400 · 1.32em del contexto · sólo “sin vueltas.”']
+    ].map(([token, val]) => ({ token, val }));
+    const misc = [
+      ['space', '4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 64 · 96 · 128'],
+      ['--gutter', 'clamp(20px, 5vw, 64px)'],
+      ['--section-y', 'clamp(72px, 10vw, 128px)'],
+      ['--container', '1200px'],
+      ['radius', '6px cajas e inputs · 999px botones · 140px curva de foto'],
+      ['shadow', 'Sólo el flotante: 0 8px 24px rgba(2,6,23,.28)'],
+      ['motion', '120–300ms linear/ease; ruta ligada al scroll'],
+      ['z-index', 'ruta 3 · marcadores 4 · header 50 · flotante 60 · skip 100'],
+      ['tap', 'mín. 44 × 44px']
+    ].map(([token, val]) => ({ token, val }));
+    const pairs = [
+      ['#F8FAFC', '#111827', '≈ 17:1', 'Tinta sobre papel'],
+      ['#F8FAFC', '#526174', '≈ 6.2:1', 'Secundario sobre papel'],
+      ['#F8FAFC', '#2E63A4', '≈ 5.9:1', 'Azul sobre papel'],
+      ['#07172F', '#F8FAFC', '≈ 17:1', 'Papel sobre navy'],
+      ['#07172F', '#C9D6E4', '≈ 12:1', 'Secundario sobre navy'],
+      ['#07172F', '#93C5E8', '≈ 10:1', 'Celeste sobre navy'],
+      ['#07172F', '#DFB04C', '≈ 9:1', 'Dorado sobre navy'],
+      ['#25D366', '#07172F', '≈ 9:1', 'Navy sobre verde WhatsApp'],
+      ['#FFFFFF', '#B42318', '≈ 6.5:1', 'Error sobre blanco']
+    ].map(([bg, fg, ratio, label]) => ({ bg, fg, ratio, label }));
+    const pending = [
+      ['Fotos sin marca de agua', 'El retrato del hero tiene el patrón “Gestoría GS” incrustado. Hace falta el original limpio, idealmente en alta resolución.'],
+      ['Monograma en vector', 'Sólo tenemos un JPG sobre navy. Necesitamos SVG o PNG transparente en versión clara y oscura.'],
+      ['Matrícula / habilitación', 'Número y organismo, si se quiere mostrar. Hoy no se menciona.'],
+      ['Mención de la Cámara', 'La foto muestra la Cámara de Mandatarios y Gestores de Córdoba. Confirmar si se puede nombrar como pertenencia o sólo usar la foto.'],
+      ['Zona de cobertura', 'Hoy dice “Córdoba”. Confirmar ciudad, localidades y si atiende a distancia.'],
+      ['Dirección y modalidad', 'Si hay oficina o atención a domicilio. Sin esto no se publica dirección ni mapa.'],
+      ['Horarios de atención', 'Para el footer y para el mensaje de éxito del formulario.'],
+      ['Texto “Sobre mí”', 'El primer párrafo usa la frase del flyer; el segundo es borrador. Validar con Gisella.'],
+      ['Respuestas del FAQ', 'Redactadas sin prometer plazos ni precios. Validar contenido y tono.'],
+      ['Descripciones de servicios', 'Confirmar que los 8 servicios y sus textos son correctos, y si “inscripciones, bajas, multas” van en la línea final.'],
+      ['Política de privacidad', 'Texto legal y responsable del tratamiento de datos (Ley 25.326).'],
+      ['Envío del formulario', 'Hosting y proveedor de email; confirmar que info.gestoriags@gmail.com es el destino.'],
+      ['Reseñas o testimonios', 'No se incluyeron. Si existen reseñas reales (Google, Instagram) con permiso, se pueden sumar a la franja de confianza.'],
+      ['Dominio y analítica', 'Dominio del sitio y herramienta de medición para los eventos de WhatsApp.']
+    ].map(([t, d], i) => ({ n: String(i + 1).padStart(2, '0'), t, d }));
+    return { colors, type, misc, pairs, pending };
+  }
+}
+</script>
+</body>
+</html>

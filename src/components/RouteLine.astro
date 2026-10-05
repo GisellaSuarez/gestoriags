@@ -1,0 +1,235 @@
+---
+---
+
+<div id="route-line-container" class="route-line-container" aria-hidden="true">
+  <svg id="route-svg" class="route-svg" fill="none">
+    <path
+      id="route-path-bg"
+      stroke="#93C5E8"
+      stroke-opacity="0.55"
+      stroke-width="1.5"
+      stroke-dasharray="3 7"
+      stroke-linecap="round"
+    />
+    <path
+      id="route-path-prog"
+      stroke="#2E63A4"
+      stroke-width="2.25"
+      stroke-linecap="round"
+      pathLength="1"
+      stroke-dasharray="1 1"
+      style="stroke-dashoffset: 1;"
+    />
+    <circle
+      id="route-dot-end"
+      r="6"
+      fill="#DFB04C"
+      style="opacity: 0; transition: opacity 0.3s ease;"
+    />
+  </svg>
+</div>
+
+<style>
+  .route-line-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    overflow: visible;
+  }
+
+  .route-svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  function setupRouteLine() {
+    const container = document.getElementById('route-line-container');
+    const svg = document.getElementById('route-svg') as SVGSVGElement | null;
+    const pathBg = document.getElementById('route-path-bg');
+    const pathProg = document.getElementById('route-path-prog');
+    const dotEnd = document.getElementById('route-dot-end');
+
+    if (!container || !svg || !pathBg || !pathProg || !dotEnd) return;
+
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+    let lut: number[] = [];
+    let rafId = 0;
+
+    function measureAndDraw() {
+      const root = container?.parentElement || document.body;
+      const rr = root.getBoundingClientRect();
+
+      const getRel = (el: Element) => {
+        const r = el.getBoundingClientRect();
+        return {
+          l: r.left - rr.left,
+          t: r.top - rr.top,
+          r: r.right - rr.left,
+          b: r.bottom - rr.top,
+          cx: (r.left + r.right) / 2 - rr.left,
+          cy: (r.top + r.bottom) / 2 - rr.top,
+        };
+      };
+
+      const startEl = document.querySelector('[data-route="start"]');
+      const contentEl = document.querySelector('[data-route="content"]');
+      const endEl = document.querySelector('[data-route="end"]');
+      const markerEls = Array.from(
+        document.querySelectorAll('[data-route="m"]')
+      );
+      const heroEl = document.querySelector('#inicio');
+      const procEl = document.querySelector('#proceso');
+
+      if (
+        !startEl ||
+        !contentEl ||
+        !endEl ||
+        markerEls.length < 3 ||
+        !heroEl ||
+        !procEl
+      ) {
+        return;
+      }
+
+      const W = root.clientWidth;
+      const H = root.scrollHeight;
+
+      svg?.setAttribute('viewBox', `0 0 ${W} ${H}`);
+      svg?.setAttribute('width', `${W}`);
+      svg?.setAttribute('height', `${H}`);
+
+      const s = getRel(startEl);
+      const h = getRel(heroEl);
+      const p = getRel(procEl);
+      const e = getRel(endEl);
+      const ms = markerEls.map(getRel);
+
+      const parentEl = contentEl.parentElement;
+      const padL = parentEl
+        ? parseFloat(getComputedStyle(parentEl).paddingLeft) || 20
+        : 20;
+      const c = parentEl ? getRel(parentEl) : { l: 20, r: W - 20 };
+      const off = Math.min(28, padL / 2);
+      const gL = c.l + padL - off;
+      const gR = c.r - padL + off;
+      const isDesktop = window.innerWidth >= 768;
+
+      const pts: [number, number][] = [
+        [s.cx, s.cy],
+        [gL, h.b],
+        [gL, p.t + 40],
+      ];
+
+      ms.forEach((m) => pts.push([m.cx, m.cy]));
+
+      const g2 = isDesktop ? gR : gL;
+      pts.push([g2, p.b]);
+
+      const ex = isDesktop ? e.r + 16 : e.l - 16;
+      pts.push([g2, e.cy - 90]);
+      pts.push([ex, e.cy]);
+
+      // Generar curva cúbica Bézier suave
+      let d = `M${pts[0][0]},${pts[0][1]}`;
+      for (let i = 1; i < pts.length; i++) {
+        const [x0, y0] = pts[i - 1];
+        const [x1, y1] = pts[i];
+        const dx = x1 - x0;
+        const dy = y1 - y0;
+
+        if (Math.abs(dy) >= Math.abs(dx)) {
+          d += ` C${x0},${y0 + dy * 0.5} ${x1},${y1 - dy * 0.5} ${x1},${y1}`;
+        } else {
+          d += ` C${x0 + dx * 0.5},${y0} ${x1 - dx * 0.5},${y1} ${x1},${y1}`;
+        }
+      }
+
+      pathBg?.setAttribute('d', d);
+      pathProg?.setAttribute('d', d);
+      dotEnd?.setAttribute('cx', `${ex}`);
+      dotEnd?.setAttribute('cy', `${e.cy}`);
+
+      // Generar LUT (Look Up Table) para el progreso suave según scroll
+      const progPath = pathProg as unknown as SVGPathElement;
+      if (progPath && progPath.getTotalLength) {
+        const totalLen = progPath.getTotalLength();
+        lut = [];
+        const samples = 200;
+        for (let i = 0; i <= samples; i++) {
+          lut.push(progPath.getPointAtLength((totalLen * i) / samples).y);
+        }
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      if (reducedMotion) {
+        if (pathProg) pathProg.style.strokeDashoffset = '0';
+        if (dotEnd) dotEnd.style.opacity = '1';
+        return;
+      }
+
+      const root = container?.parentElement || document.body;
+      const top = root.getBoundingClientRect().top;
+      const target = -top + window.innerHeight * 0.62;
+
+      let frac = 1;
+      if (lut.length > 1) {
+        let i = 0;
+        while (i < lut.length && lut[i] <= target) i++;
+        frac = Math.max(0.02, Math.min(1, i / (lut.length - 1)));
+      }
+
+      if (pathProg) {
+        pathProg.style.strokeDashoffset = String(1 - frac);
+      }
+
+      if (dotEnd) {
+        dotEnd.style.opacity = frac >= 0.99 ? '1' : '0';
+      }
+    }
+
+    function onScroll() {
+      if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          rafId = 0;
+          updateProgress();
+        });
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      measureAndDraw();
+    });
+
+    if ('ResizeObserver' in window && container.parentElement) {
+      const ro = new ResizeObserver(() => measureAndDraw());
+      ro.observe(container.parentElement);
+    }
+
+    if (document.fonts) {
+      document.fonts.ready.then(() => measureAndDraw());
+    }
+
+    // Inicialización tras montaje
+    setTimeout(measureAndDraw, 150);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupRouteLine);
+  } else {
+    setupRouteLine();
+  }
+</script>

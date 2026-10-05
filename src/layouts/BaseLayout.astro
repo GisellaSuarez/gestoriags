@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+import SeoHead from '../components/SeoHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloatingButton from '../components/WhatsAppFloatingButton.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  hideFloatingWa?: boolean;
+}
+
+const {
+  title,
+  description,
+  image,
+  noindex = false,
+  hideFloatingWa = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <SeoHead
+      title={title}
+      description={description}
+      image={image}
+      noindex={noindex}
+    />
+  </head>
+  <body>
+    <a href="#contenido" class="skip-link">
+      Saltar al contenido
+    </a>
+    <Header />
+    <slot />
+    <Footer />
+    {!hideFloatingWa && <WhatsAppFloatingButton />}
+  </body>
+</html>

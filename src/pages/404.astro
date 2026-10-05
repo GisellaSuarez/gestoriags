@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getWhatsAppUrl } from '../config/business';
+
+const waUrl = getWhatsAppUrl(
+  undefined,
+  'Hola Gisella, estaba navegando en tu web y quería hacerte una consulta.'
+);
+---
+
+<BaseLayout
+  title="Página no encontrada — Gestoría GS"
+  description="La página que estás buscando no existe o fue movida."
+  noindex={true}
+>
+  <main id="contenido" class="notfound-main">
+    <div class="container notfound-container">
+      <div class="notfound-card">
+        <p class="notfound-code">404</p>
+        <h1 class="notfound-title">Esta página no está disponible.</h1>
+        <p class="notfound-desc">
+          Es posible que el enlace esté roto o que la dirección haya cambiado.
+          Podés volver a la página principal o consultarme directamente.
+        </p>
+
+        <div class="notfound-actions">
+          <a href="/" class="btn-home">
+            Ir al inicio
+          </a>
+          <a href={waUrl} target="_blank" rel="noopener" class="btn-wa">
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .notfound-main {
+    min-height: calc(100vh - var(--header-h) - 200px);
+    display: flex;
+    align-items: center;
+    padding: clamp(64px, 10vw, 120px) 0;
+  }
+
+  .notfound-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .notfound-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: clamp(32px, 5vw, 64px);
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .notfound-code {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+
+  .notfound-title {
+    margin: 0;
+    font-size: clamp(2rem, 1.4rem + 2vw, 2.75rem);
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--navy-900);
+  }
+
+  .notfound-desc {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text-2);
+  }
+
+  .notfound-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .btn-home {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 24px;
+    border-radius: var(--r-pill);
+    background: var(--navy-800);
+    color: var(--paper);
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .btn-home:hover {
+    background: var(--navy-900);
+  }
+
+  .btn-wa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 24px;
+    border-radius: var(--r-pill);
+    border: 1.5px solid var(--navy-800);
+    color: var(--navy-800);
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .btn-wa:hover {
+    background: var(--navy-800);
+    color: var(--paper);
+  }
+</style>

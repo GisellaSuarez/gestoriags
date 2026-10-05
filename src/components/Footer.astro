@@ -1,0 +1,254 @@
+---
+import { Image } from 'astro:assets';
+import monogramImg from '../assets/brand/gs-monograma.png';
+import { BUSINESS, getWhatsAppUrl } from '../config/business';
+
+const waFooterUrl = getWhatsAppUrl();
+---
+
+<footer id="footer" class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <Image
+        src={monogramImg}
+        alt=""
+        width={56}
+        height={56}
+        class="footer-logo"
+        loading="lazy"
+      />
+      <div class="footer-brand-info">
+        <strong class="footer-person-name">{BUSINESS.personName}</strong>
+        <span class="footer-brand-sub">
+          {BUSINESS.shortName} · Gestoría del automotor · {BUSINESS.location}
+        </span>
+      </div>
+    </div>
+
+    <ul class="footer-contacts">
+      <li>
+        <a
+          href={waFooterUrl}
+          target="_blank"
+          rel="noopener"
+          class="footer-link"
+        >
+          WhatsApp {BUSINESS.phoneDisplay}
+        </a>
+      </li>
+      <li>
+        <a href={`mailto:${BUSINESS.email}`} class="footer-link">
+          {BUSINESS.email}
+        </a>
+      </li>
+      <li>
+        <a
+          href={BUSINESS.instagramUrl}
+          target="_blank"
+          rel="noopener"
+          class="footer-link"
+        >
+          Instagram {BUSINESS.instagram}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container footer-bottom">
+    <p class="footer-disclaimer">
+      La información de este sitio es orientativa y no reemplaza el
+      asesoramiento personalizado sobre tu caso. Los datos del formulario se
+      usan únicamente para responder a tu consulta.
+    </p>
+    <div class="footer-meta">
+      <p class="footer-copyright">
+        © {new Date().getFullYear()} {BUSINESS.shortName} ·{' '}
+        <a href="/privacidad/" class="footer-priv-link">
+          Política de privacidad
+        </a>
+      </p>
+
+      <a
+        href="https://gecdigital.dev/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer-credit"
+        aria-label="Web creada por GEC Soluciones Digitales (abre en una pestaña nueva)"
+      >
+        <span class="footer-credit-label">Web creada por</span>
+        <img
+          src="/logo-gec.png"
+          alt=""
+          width="722"
+          height="608"
+          loading="lazy"
+          decoding="async"
+          class="footer-credit-logo"
+          aria-hidden="true"
+        />
+        <strong>GEC Soluciones Digitales</strong>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy-950);
+    color: var(--on-navy-2);
+    padding: 56px 0 40px;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+  }
+
+  .footer-brand {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex: 1 1 260px;
+  }
+
+  .footer-logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(147, 197, 232, 0.35);
+  }
+
+  .footer-brand-info {
+    line-height: 1.3;
+  }
+
+  .footer-person-name {
+    display: block;
+    color: var(--paper);
+    font-size: 17px;
+  }
+
+  .footer-brand-sub {
+    font-size: 14px;
+    color: var(--on-navy-2);
+  }
+
+  .footer-contacts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1 1 260px;
+  }
+
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap-min);
+    color: var(--paper);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--sky);
+  }
+
+  .footer-bottom {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(147, 197, 232, 0.2);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    justify-content: space-between;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .footer-disclaimer {
+    margin: 0;
+    max-width: 44em;
+    color: var(--on-navy-2);
+  }
+
+  .footer-copyright {
+    margin: 0;
+    color: var(--on-navy-2);
+  }
+
+  .footer-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  .footer-credit {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 6px 14px;
+    border: 1px solid rgba(223, 176, 76, 0.42);
+    border-radius: var(--r-pill);
+    background: rgba(255, 255, 255, 0.025);
+    box-shadow: inset 0 0 0 1px rgba(147, 197, 232, 0.06);
+    color: var(--paper);
+    text-decoration: none;
+    transition:
+      border-color 0.15s ease,
+      background-color 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .footer-credit:hover {
+    border-color: rgba(223, 176, 76, 0.82);
+    background: rgba(223, 176, 76, 0.07);
+    transform: translateY(-1px);
+  }
+
+  .footer-credit:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  .footer-credit-label {
+    color: rgba(201, 214, 228, 0.7);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .footer-credit strong {
+    font-size: 13px;
+    line-height: 1.2;
+  }
+
+  .footer-credit-logo {
+    width: 34px;
+    height: 29px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.28));
+  }
+
+  .footer-priv-link {
+    color: var(--sky);
+  }
+
+  @media (max-width: 767px) {
+    .footer-meta {
+      width: 100%;
+      align-items: flex-start;
+    }
+
+    .footer-credit {
+      max-width: 100%;
+    }
+  }
+</style>

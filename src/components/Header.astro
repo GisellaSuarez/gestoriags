@@ -1,0 +1,371 @@
+---
+import { Image } from 'astro:assets';
+import monogramImg from '../assets/brand/gs-monograma.png';
+import { BUSINESS, getWhatsAppUrl } from '../config/business';
+
+const waHeaderUrl = getWhatsAppUrl(
+  undefined,
+  'Hola Gisella, quiero consultar por un trámite.'
+);
+---
+
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="/#inicio" class="brand" aria-label="Gestoría GS, ir al inicio">
+      <Image
+        src={monogramImg}
+        alt=""
+        width={44}
+        height={44}
+        class="brand-logo"
+        loading="eager"
+      />
+      <span class="brand-text">
+        <span class="brand-name">{BUSINESS.personName}</span>
+        <span class="brand-tagline">Gestoría del automotor</span>
+      </span>
+    </a>
+
+    <!-- Navegación desktop (>= 1024px) -->
+    <nav class="nav-desktop" aria-label="Principal">
+      <a href="/#servicios" class="nav-link">
+        Servicios
+      </a>
+      <a href="/#proceso" class="nav-link">
+        Cómo trabajo
+      </a>
+      <a href="/#sobre" class="nav-link">
+        Sobre mí
+      </a>
+      <a href="/#preguntas" class="nav-link">
+        Preguntas
+      </a>
+      <a href="/#contacto" class="nav-link">
+        Contacto
+      </a>
+      <a
+        href={waHeaderUrl}
+        target="_blank"
+        rel="noopener"
+        data-track="wa_header"
+        class="btn-wa-header"
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.3z"></path>
+          <path
+            d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2-1-1 .8a4.5 4.5 0 0 1-2.4-2.4l.8-1-1-2z"
+            fill="currentColor"
+            stroke="none"
+          ></path>
+        </svg>
+        WhatsApp
+      </a>
+    </nav>
+
+    <!-- Controles mobile (< 1024px) -->
+    <div class="nav-mobile-actions">
+      <a
+        href={waHeaderUrl}
+        target="_blank"
+        rel="noopener"
+        aria-label="Consultar por WhatsApp"
+        data-track="wa_header"
+        class="btn-wa-icon"
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.3z"></path>
+          <path
+            d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2-1-1 .8a4.5 4.5 0 0 1-2.4-2.4l.8-1-1-2z"
+            fill="currentColor"
+            stroke="none"
+          ></path>
+        </svg>
+      </a>
+      <button
+        type="button"
+        id="menu-btn"
+        aria-expanded="false"
+        aria-controls="menu-movil"
+        class="btn-menu-toggle"
+      >
+        <span id="menu-btn-label">Menú</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú desplegable móvil -->
+  <nav
+    id="menu-movil"
+    class="nav-mobile-drawer"
+    aria-label="Navegación móvil"
+    hidden
+  >
+    <div class="container mobile-links">
+      <a href="/#servicios" class="mobile-nav-link">
+        Servicios
+      </a>
+      <a href="/#proceso" class="mobile-nav-link">
+        Cómo trabajo
+      </a>
+      <a href="/#sobre" class="mobile-nav-link">
+        Sobre mí
+      </a>
+      <a href="/#preguntas" class="mobile-nav-link">
+        Preguntas frecuentes
+      </a>
+      <a href="/#contacto" class="mobile-nav-link">
+        Contacto
+      </a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(248, 250, 252, 0.96);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: saturate(1.2) blur(8px);
+    -webkit-backdrop-filter: saturate(1.2) blur(8px);
+  }
+
+  .header-inner {
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--navy-900);
+    min-height: var(--tap-min);
+  }
+
+  .brand-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  .brand-name {
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    color: var(--navy-900);
+  }
+
+  .brand-tagline {
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--text-2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 2vw, 28px);
+  }
+
+  .nav-link {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 12px 2px;
+    transition: color 0.15s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--blue);
+  }
+
+  .btn-wa-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: var(--r-pill);
+    background: var(--wa);
+    color: var(--navy-900);
+    font-weight: 800;
+    font-size: 15px;
+    text-decoration: none;
+    margin-left: 8px;
+    transition:
+      background 0.15s ease,
+      transform 0.1s ease;
+  }
+
+  .btn-wa-header:hover {
+    background: var(--wa-hover);
+    color: var(--navy-900);
+  }
+
+  .nav-mobile-actions {
+    display: none;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-wa-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--wa);
+    color: var(--navy-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .btn-wa-icon:hover {
+    background: var(--wa-hover);
+  }
+
+  .btn-menu-toggle {
+    height: 44px;
+    padding: 0 16px;
+    border-radius: var(--r-pill);
+    border: 1.5px solid var(--navy-800);
+    background: transparent;
+    color: var(--navy-800);
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .btn-menu-toggle:hover {
+    background: var(--navy-900);
+    color: var(--paper);
+  }
+
+  .nav-mobile-drawer {
+    border-top: 1px solid var(--border);
+    background: var(--paper);
+    padding: 8px 0 20px;
+  }
+
+  .mobile-links {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    border-bottom: 1px solid var(--border);
+    color: var(--navy-900);
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+  }
+
+  .mobile-nav-link:last-child {
+    border-bottom: none;
+  }
+
+  @media (max-width: 1023px) {
+    .nav-desktop {
+      display: none;
+    }
+    .nav-mobile-actions {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  function setupHeader() {
+    const btn = document.getElementById('menu-btn');
+    const label = document.getElementById('menu-btn-label');
+    const drawer = document.getElementById('menu-movil');
+    if (!btn || !drawer || !label) return;
+
+    function toggleMenu(open?: boolean) {
+      const isExpanded = btn?.getAttribute('aria-expanded') === 'true';
+      const shouldOpen = open !== undefined ? open : !isExpanded;
+      btn?.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+      if (shouldOpen) {
+        drawer?.removeAttribute('hidden');
+        if (label) label.textContent = 'Cerrar';
+      } else {
+        drawer?.setAttribute('hidden', '');
+        if (label) label.textContent = 'Menú';
+      }
+    }
+
+    btn.addEventListener('click', () => toggleMenu());
+
+    // Cerrar al hacer clic en enlaces del menú
+    drawer.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => toggleMenu(false));
+    });
+
+    // Cerrar con Escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        toggleMenu(false);
+        btn.focus();
+      }
+    });
+
+    // Ajustar si la ventana cambia a desktop
+    window.addEventListener('resize', () => {
+      if (
+        window.innerWidth >= 1024 &&
+        btn.getAttribute('aria-expanded') === 'true'
+      ) {
+        toggleMenu(false);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupHeader);
+  } else {
+    setupHeader();
+  }
+</script>

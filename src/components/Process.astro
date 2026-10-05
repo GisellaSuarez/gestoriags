@@ -1,0 +1,134 @@
+---
+const steps = [
+  {
+    num: '1',
+    title: 'Contame qué necesitás',
+    desc: 'Escribime por WhatsApp o dejá tu consulta en el formulario. Con una breve descripción alcanza.',
+  },
+  {
+    num: '2',
+    title: 'Revisamos tu caso',
+    desc: 'Te digo qué documentación hace falta y cuál es el mejor camino para tu situación.',
+  },
+  {
+    num: '3',
+    title: 'Avanzamos con claridad',
+    desc: 'Gestiono el trámite y te mantengo al tanto hasta que esté terminado.',
+  },
+];
+---
+
+<section id="proceso" aria-labelledby="h-proceso" class="process-section">
+  <div class="container">
+    <p class="section-eyebrow">Cómo trabajo</p>
+    <h2 id="h-proceso" class="section-title">
+      Tres pasos, una sola persona de referencia.
+    </h2>
+
+    <ol class="process-steps">
+      {steps.map((step) => (
+        <li class="step-item">
+          <span data-route="m" class="step-marker">
+            {step.num}
+          </span>
+          <div class="step-content">
+            <strong class="step-title">{step.title}</strong>
+            <span class="step-desc">{step.desc}</span>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process-section {
+    scroll-margin-top: var(--header-h);
+    padding: var(--section-y) 0;
+  }
+
+  .section-eyebrow {
+    margin: 0 0 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+
+  .section-title {
+    margin: 0;
+    max-width: 680px;
+    font-size: var(--fs-h2);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    color: var(--navy-900);
+    text-wrap: balance;
+  }
+
+  .process-steps {
+    list-style: none;
+    margin: clamp(40px, 6vw, 72px) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(28px, 4vw, 48px);
+  }
+
+  @media (min-width: 768px) {
+    .process-steps {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .step-item {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  @media (min-width: 768px) {
+    .step-item {
+      flex-direction: column;
+    }
+  }
+
+  .step-marker {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--navy-900);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 20px;
+    position: relative;
+    z-index: 4;
+    box-shadow: 0 0 0 6px var(--paper);
+  }
+
+  .step-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .step-title {
+    display: block;
+    font-size: 22px;
+    letter-spacing: -0.015em;
+    color: var(--navy-900);
+  }
+
+  .step-desc {
+    display: block;
+    margin-top: 8px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-2);
+  }
+</style>

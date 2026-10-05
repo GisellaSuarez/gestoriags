@@ -1,0 +1,132 @@
+---
+import { Image } from 'astro:assets';
+import camaraImg from '../assets/photos/gisella-camara.jpg';
+import { BUSINESS } from '../config/business';
+---
+
+<section id="sobre" aria-labelledby="h-sobre" class="about-section">
+  <div class="container about-container">
+    <figure class="about-media">
+      <Image
+        src={camaraImg}
+        alt="Gisella Suárez sosteniendo su constancia frente al cartel de la Cámara de Mandatarios y Gestores de Córdoba"
+        width={500}
+        height={500}
+        widths={[300, 420, 500]}
+        sizes="(max-width: 768px) 90vw, 500px"
+        format="webp"
+        loading="lazy"
+        class="about-img"
+      />
+    </figure>
+
+    <div class="about-content">
+      <p class="section-eyebrow">Sobre mí</p>
+      <h2 id="h-sobre" class="section-title">
+        Hola, soy Gisella.
+      </h2>
+      <p class="about-p-lead">
+        Soy gestora del automotor en Córdoba. Mi compromiso es realizar cada
+        trámite con responsabilidad, seriedad y dedicación, para que vos tengas
+        la tranquilidad de que todo está en buenas manos.
+      </p>
+      <p class="about-p">
+        Te explico cada paso con palabras simples y respondo tus dudas
+        personalmente, de principio a fin.
+      </p>
+
+      <ul aria-label="Valores de trabajo" class="values-list">
+        {BUSINESS.values.map((val) => (
+          <li class="value-pill">{val}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    scroll-margin-top: var(--header-h);
+    padding: 0 0 clamp(72px, 10vw, 128px);
+  }
+
+  .about-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(40px, 6vw, 96px);
+  }
+
+  .about-media {
+    flex: 1 1 300px;
+    max-width: 500px;
+    margin: 0;
+  }
+
+  .about-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--r-curve) var(--r-sm) var(--r-sm) var(--r-sm);
+    display: block;
+    background: var(--border);
+  }
+
+  .about-content {
+    flex: 1 1 400px;
+    min-width: 0;
+  }
+
+  .section-eyebrow {
+    margin: 0 0 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+
+  .section-title {
+    margin: 0;
+    font-size: var(--fs-h2);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    color: var(--navy-900);
+  }
+
+  .about-p-lead {
+    margin: 20px 0 0;
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+
+  .about-p {
+    margin: 16px 0 0;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-2);
+    text-wrap: pretty;
+  }
+
+  .values-list {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .value-pill {
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-pill);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy-800);
+    background: #ffffff;
+  }
+</style>

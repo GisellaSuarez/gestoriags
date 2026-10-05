@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gestoriags.com.ar/sitemap-index.xml

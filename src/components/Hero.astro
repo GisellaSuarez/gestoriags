@@ -1,0 +1,254 @@
+---
+import { Image } from 'astro:assets';
+import retratoImg from '../assets/photos/gisella-retrato.jpg';
+import monogramImg from '../assets/brand/gs-monograma.png';
+import { getWhatsAppUrl } from '../config/business';
+
+const waHeroUrl = getWhatsAppUrl(
+  undefined,
+  'Hola Gisella, vi tu web y quiero consultar por un trámite.'
+);
+---
+
+<section id="inicio" aria-labelledby="h-hero" class="hero-section">
+  <div class="hero-container container">
+    <div data-route="content" class="hero-content">
+      <p class="hero-eyebrow">Gestoría del automotor en Córdoba</p>
+      <h1 id="h-hero" class="hero-title">
+        Tu trámite automotor, claro y{' '}
+        <span class="hero-script">sin vueltas.</span>
+      </h1>
+      <p class="hero-desc">
+        Te asesoro y acompaño en transferencias, informes, verificaciones y
+        otros trámites de autos y motos, con atención personalizada de principio
+        a fin.
+      </p>
+
+      <div class="hero-actions">
+        <a
+          id="hero-wa-cta"
+          href={waHeroUrl}
+          target="_blank"
+          rel="noopener"
+          data-track="wa_hero"
+          class="btn-wa-hero"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.3z"></path>
+            <path
+              d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2-1-1 .8a4.5 4.5 0 0 1-2.4-2.4l.8-1-1-2z"
+              fill="currentColor"
+              stroke="none"
+            ></path>
+          </svg>
+          Consultar por WhatsApp
+        </a>
+        <a href="#servicios" class="btn-services-hero">
+          Ver servicios
+        </a>
+      </div>
+
+      <p class="hero-proof">
+        Atención personalizada · Seguimiento · Gestión responsable
+      </p>
+    </div>
+
+    <div class="hero-media">
+      <div class="hero-image-wrapper">
+        <Image
+          src={retratoImg}
+          alt="Gisella Suárez, gestora del automotor, sonriendo"
+          width={460}
+          height={575}
+          widths={[320, 460, 640]}
+          sizes="(max-width: 768px) 90vw, 460px"
+          format="webp"
+          loading="eager"
+          fetchpriority="high"
+          class="hero-img"
+        />
+      </div>
+      <Image
+        data-route="start"
+        src={monogramImg}
+        alt=""
+        width={96}
+        height={96}
+        class="hero-badge"
+        loading="eager"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    scroll-margin-top: var(--header-h);
+    padding: clamp(40px, 7vw, 96px) 0 clamp(48px, 7vw, 96px);
+  }
+
+  .hero-container {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(40px, 6vw, 88px);
+  }
+
+  .hero-content {
+    flex: 1 1 440px;
+    min-width: 0;
+  }
+
+  .hero-eyebrow {
+    margin: 0 0 20px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+
+  .hero-title {
+    margin: 0;
+    font-size: var(--fs-h1);
+    line-height: 1.02;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--navy-900);
+    text-wrap: balance;
+  }
+
+  .hero-script {
+    font-family: var(--script);
+    font-weight: 400;
+    font-size: 1.32em;
+    letter-spacing: 0;
+    color: var(--blue);
+    line-height: 0.8;
+    display: inline-block;
+  }
+
+  .hero-desc {
+    margin: 24px 0 0;
+    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--text-2);
+    max-width: 34em;
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .btn-wa-hero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 56px;
+    padding: 0 26px;
+    border-radius: var(--r-pill);
+    background: var(--wa);
+    color: var(--navy-900);
+    font-weight: 800;
+    font-size: 17px;
+    text-decoration: none;
+    flex: 1 1 auto;
+    max-width: 340px;
+    transition:
+      background 0.15s ease,
+      transform 0.1s ease;
+  }
+
+  .btn-wa-hero:hover {
+    background: var(--wa-hover);
+    color: var(--navy-900);
+  }
+
+  .btn-services-hero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    padding: 0 26px;
+    border-radius: var(--r-pill);
+    border: 1.5px solid var(--navy-800);
+    color: var(--navy-800);
+    font-weight: 700;
+    font-size: 17px;
+    text-decoration: none;
+    flex: 0 1 auto;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .btn-services-hero:hover {
+    background: var(--navy-800);
+    color: var(--paper);
+  }
+
+  .hero-proof {
+    margin: 28px 0 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-2);
+    letter-spacing: 0.01em;
+  }
+
+  .hero-media {
+    flex: 1 1 300px;
+    max-width: 460px;
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-image-wrapper {
+    width: 100%;
+    aspect-ratio: 4/5;
+    border-radius: var(--r-sm) var(--r-sm) var(--r-sm) var(--r-curve);
+    overflow: hidden;
+    background: var(--border);
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 12%;
+    display: block;
+  }
+
+  .hero-badge {
+    position: absolute;
+    left: -20px;
+    bottom: 24px;
+    width: clamp(72px, 9vw, 96px);
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 0 0 6px var(--paper);
+    z-index: 4;
+  }
+
+  @media (max-width: 767px) {
+    .hero-badge {
+      left: 12px;
+      bottom: -16px;
+    }
+  }
+</style>

@@ -1,0 +1,123 @@
+---
+import { SERVICES } from '../data/services';
+import ServiceCard from './ServiceCard.astro';
+import { getWhatsAppUrl } from '../config/business';
+
+const featuredServices = SERVICES.filter((s) => s.featured);
+const listServices = SERVICES.filter((s) => !s.featured);
+const waOtherUrl = getWhatsAppUrl(
+  undefined,
+  'Hola Gisella, quiero consultar por un trámite que no figura en la lista.'
+);
+---
+
+<section id="servicios" aria-labelledby="h-servicios" class="services-section">
+  <div class="container">
+    <div class="services-intro">
+      <p class="section-eyebrow">Servicios</p>
+      <h2 id="h-servicios" class="section-title">
+        Trámites de autos y motos, explicados y acompañados.
+      </h2>
+      <p class="section-desc">
+        Cada caso es distinto. Contame qué necesitás y te digo cómo avanzar con
+        tu trámite.
+      </p>
+    </div>
+
+    <!-- Servicios destacados (01 y 02) -->
+    <div class="featured-grid">
+      {featuredServices.map((service) => (
+        <ServiceCard service={service} />
+      ))}
+    </div>
+
+    <!-- Servicios en lista editorial (03 a 08) -->
+    <div class="list-grid">
+      {listServices.map((service) => (
+        <ServiceCard service={service} />
+      ))}
+    </div>
+
+    <!-- Nota inferior para trámites no listados -->
+    <div class="services-footer-note">
+      <p>
+        ¿Tu trámite no está en la lista? También podés consultarme por
+        inscripciones, bajas, multas e infracciones de tránsito.{' '}
+        <a href={waOtherUrl} target="_blank" rel="noopener" class="note-link">
+          Escribime
+        </a>
+        .
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    scroll-margin-top: var(--header-h);
+    padding: var(--section-y) 0;
+  }
+
+  .services-intro {
+    max-width: 720px;
+  }
+
+  .section-eyebrow {
+    margin: 0 0 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+
+  .section-title {
+    margin: 0;
+    font-size: var(--fs-h2);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    color: var(--navy-900);
+    text-wrap: balance;
+  }
+
+  .section-desc {
+    margin: 20px 0 0;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-2);
+    text-wrap: pretty;
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 16px;
+    margin-top: clamp(40px, 6vw, 64px);
+  }
+
+  .list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    column-gap: clamp(24px, 4vw, 56px);
+    margin-top: clamp(32px, 5vw, 56px);
+  }
+
+  .services-footer-note {
+    margin: 24px 0 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-2);
+  }
+
+  .services-footer-note p {
+    margin: 0;
+  }
+
+  .note-link {
+    font-weight: 700;
+    color: var(--blue);
+  }
+</style>

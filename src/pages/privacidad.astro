@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { BUSINESS } from '../config/business';
+---
+
+<BaseLayout
+  title="Política de Privacidad — Gestoría GS"
+  description="Información sobre el tratamiento de datos personales y privacidad en Gestoría GS."
+>
+  <main id="contenido" class="privacy-main">
+    <div class="container privacy-container">
+      <article class="privacy-article">
+        <header class="privacy-header">
+          <p class="privacy-eyebrow">Aviso legal y transparencia</p>
+          <h1 class="privacy-title">Política de Privacidad</h1>
+          <p class="privacy-date">Última actualización: Octubre 2026</p>
+        </header>
+
+        <section class="privacy-section">
+          <h2>1. Responsable del tratamiento</h2>
+          <p>
+            El responsable del tratamiento de los datos recabados a través de
+            este sitio web es <strong>{BUSINESS.personName}</strong> (
+            {BUSINESS.name}), con domicilio profesional en la ciudad de{' '}
+            {BUSINESS.location}, correo electrónico de contacto:{' '}
+            <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>.
+          </p>
+        </section>
+
+        <section class="privacy-section">
+          <h2>2. Datos recolectados y finalidad</h2>
+          <p>
+            A través del formulario de contacto se solicitan únicamente datos
+            mínimos de identificación y comunicación:
+          </p>
+          <ul>
+            <li>
+              <strong>Nombre:</strong> para dirigirnos a vos de manera adecuada.
+            </li>
+            <li>
+              <strong>WhatsApp o teléfono:</strong> como vía principal para
+              responder a tu consulta.
+            </li>
+            <li>
+              <strong>Correo electrónico (opcional):</strong> como vía
+              alternativa de respuesta si lo preferís.
+            </li>
+            <li>
+              <strong>Tipo de trámite y descripción de la consulta:</strong>{' '}
+              para evaluar tu caso y asesorarte sobre la documentación
+              necesaria.
+            </li>
+          </ul>
+          <p>
+            En el formulario de contacto inicial{' '}
+            <strong>
+              no solicitamos números de DNI, patentes, cédulas, títulos del
+              automotor ni copias de documentación
+            </strong>
+            . Recomendamos no incluir esta información en el mensaje libre. En
+            caso de que decidas compartir voluntariamente datos adicionales para
+            describir tu caso, los mismos serán tratados con confidencialidad y
+            con el único fin de orientarte en la gestión solicitada.
+          </p>
+        </section>
+
+        <section class="privacy-section">
+          <h2>3. Finalidad del tratamiento</h2>
+          <p>
+            Los datos personales facilitados serán utilizados con la{' '}
+            <strong>única y exclusiva finalidad</strong> de responder a las
+            consultas formuladas, brindar orientación sobre trámites de
+            automotores y motos, y coordinar los servicios en caso de que
+            decidas contratarlos. Tus datos no serán vendidos, cedidos ni
+            empleados para el envío de publicidad masiva o boletines comerciales
+            no solicitados.
+          </p>
+        </section>
+
+        <section class="privacy-section">
+          <h2>4. Procesamiento técnico del formulario y conservación</h2>
+          <p>
+            El formulario de contacto utiliza la infraestructura técnica de{' '}
+            <strong>Netlify Forms</strong> (servicio provisto por Netlify Inc.
+            como proveedor externo de alojamiento web). Los datos enviados son
+            recibidos y procesados por dicha plataforma bajo conexión cifrada
+            HTTPS. Las notificaciones hacia la casilla oficial de correo
+            electrónico funcionan mediante las reglas de notificación que se
+            configuran en el panel de control de Netlify.
+          </p>
+          <p>
+            Los datos de contacto se conservan durante el tiempo necesario para
+            atender y dar respuesta a la consulta formulada, o hasta que su
+            titular solicite su supresión.
+          </p>
+        </section>
+
+        <section class="privacy-section">
+          <h2>5. Derechos del titular de los datos (Ley 25.326)</h2>
+          <p>
+            En cumplimiento de la{' '}
+            <strong>
+              Ley de Protección de los Datos Personales de la República
+              Argentina (Ley Nº 25.326)
+            </strong>
+            , tenés derecho a acceder a tus datos personales, rectificarlos en
+            caso de error o solicitar su supresión en cualquier momento.
+          </p>
+          <p>
+            Para ejercer estos derechos, podés enviar una solicitud por escrito
+            a <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>{' '}
+            indicando tu nombre y la acción solicitada.
+          </p>
+          <p class="aaip-note">
+            La Agencia de Acceso a la Información Pública (AAIP), en su carácter
+            de Órgano de Control de la Ley Nº 25.326, tiene la atribución de
+            atender las denuncias y reclamos que interpongan quienes resulten
+            afectados en sus derechos por incumplimiento de las normas vigentes
+            en materia de protección de datos personales.
+          </p>
+          <p class="legal-disclaimer">
+            Nota: Este documento tiene carácter puramente informativo acerca de
+            las prácticas de contacto de este sitio web y no constituye
+            asesoramiento legal definitivo. Se encuentra pendiente de revisión
+            legal formal previa al lanzamiento final.
+          </p>
+        </section>
+
+        <div class="privacy-back">
+          <a href="/" class="btn-back">
+            ← Volver al inicio
+          </a>
+        </div>
+      </article>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .privacy-main {
+    padding: clamp(48px, 8vw, 96px) 0;
+    background: var(--paper);
+  }
+
+  .privacy-container {
+    max-width: 800px;
+  }
+
+  .privacy-article {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: clamp(32px, 5vw, 64px);
+  }
+
+  .privacy-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+  }
+
+  .privacy-eyebrow {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+
+  .privacy-title {
+    margin: 0;
+    font-size: clamp(2rem, 1.4rem + 2vw, 3rem);
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--navy-900);
+  }
+
+  .privacy-date {
+    margin: 12px 0 0;
+    font-size: 14px;
+    color: var(--text-2);
+  }
+
+  .privacy-section {
+    margin-bottom: 32px;
+  }
+
+  .privacy-section h2 {
+    margin: 0 0 14px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy-900);
+  }
+
+  .privacy-section p {
+    margin: 0 0 14px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-2);
+  }
+
+  .privacy-section ul {
+    margin: 0 0 16px;
+    padding-left: 20px;
+    color: var(--text-2);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .privacy-section ul strong {
+    color: var(--ink);
+  }
+
+  .aaip-note {
+    font-size: 14px !important;
+    background: #f1f5f9;
+    padding: 14px 18px;
+    border-radius: var(--r-sm);
+    border-left: 3px solid var(--blue);
+    color: var(--text-2) !important;
+  }
+
+  .legal-disclaimer {
+    margin-top: 16px;
+    font-size: 13px !important;
+    color: var(--text-2) !important;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .privacy-back {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--blue);
+  }
+</style>
