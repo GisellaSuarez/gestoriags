@@ -3,6 +3,10 @@
   publish = "dist"
   functions = "netlify/functions"
 
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "CONTACT_RECIPIENT_EMAIL,RESEND_FROM_EMAIL"
+  SECRETS_SCAN_OMIT_PATHS = "docs/**,scratch/**,README.md"
+
 [[redirects]]
   from = "/api/contacto"
   to = "/.netlify/functions/contacto"
