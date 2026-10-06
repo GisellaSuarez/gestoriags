@@ -1,8 +1,8 @@
 # Gestoría GS — Landing Web
 
-Sitio web estático de alta conversión y optimización SEO local para **Gisella Suárez · Gestoría GS**, especializada en trámites del automotor y motovehículos en Córdoba, Argentina.
+Sitio web estático de alta conversión y optimización SEO local para **Gisella Suárez · Gestoría GS**, especializada en gestión integral del automotor y soluciones vehiculares en Córdoba, Argentina.
 
-Desarrollado con arquitectura estática ultra liviana, sin frameworks de cliente pesados, con diseño editorial personalizado (*“Ruta clara, trato humano”*) y enfoque en captación directa vía **WhatsApp** y **formulario de contacto por correo electrónico**.
+Desarrollado con arquitectura estática ultra liviana, sin frameworks de cliente pesados, con diseño editorial personalizado (_“Ruta clara, trato humano”_) y enfoque en captación directa vía **WhatsApp** y **formulario de contacto por correo electrónico**.
 
 ---
 
@@ -13,7 +13,7 @@ Desarrollado con arquitectura estática ultra liviana, sin frameworks de cliente
 - **Tipografía:** Autoalojada vía `@fontsource-variable/manrope` (titulares y cuerpo) y `@fontsource/allura` (firma caligráfica “sin vueltas”)
 - **Estilos:** CSS nativo con variables de diseño centralizadas (`src/styles/tokens.css` y `src/styles/global.css`)
 - **SEO & Sitemaps:** `@astrojs/sitemap`, metaetiquetas Open Graph/Twitter completas y marcado estructurado JSON-LD (`ProfessionalService` y `Person`)
-- **Formularios:** HTML semántico estático compatible con **Netlify Forms**, con protección honeypot y redirección a `/gracias/`
+- **Formularios:** HTML semántico con validación accesible, función serverless de Netlify y envío transaccional mediante **Resend**
 - **Hosting sugerido:** Netlify (configurado mediante `netlify.toml`)
 
 ---
@@ -22,16 +22,16 @@ Desarrollado con arquitectura estática ultra liviana, sin frameworks de cliente
 
 Todos los comandos se ejecutan desde la raíz del proyecto en la terminal:
 
-| Comando | Descripción |
-|---|---|
-| `npm install` | Instala las dependencias del proyecto |
-| `npm run dev` | Inicia el servidor de desarrollo local en `http://localhost:4321` |
-| `npm run check` | Ejecuta la verificación estricta de tipos con `@astrojs/check` y TypeScript |
-| `npm run lint` | Alias de `astro check` para verificación de tipos y reglas Astro (no es un linter independiente como ESLint) |
-| `npm run format` | Aplica formato con Prettier sobre los archivos configurados dentro de `src/` (`.astro`, `.ts`, `.css`) |
-| `npm run format:check` | Comprueba el formato de código con Prettier únicamente sobre los archivos configurados dentro de `src/` |
-| `npm run build` | Compila la versión estática de producción en la carpeta `./dist/` |
-| `npm run preview` | Previsualiza el build de producción localmente |
+| Comando                | Descripción                                                                                                  |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `npm install`          | Instala las dependencias del proyecto                                                                        |
+| `npm run dev`          | Inicia el servidor de desarrollo local en `http://localhost:4321`                                            |
+| `npm run check`        | Ejecuta la verificación estricta de tipos con `@astrojs/check` y TypeScript                                  |
+| `npm run lint`         | Alias de `astro check` para verificación de tipos y reglas Astro (no es un linter independiente como ESLint) |
+| `npm run format`       | Aplica formato con Prettier sobre los archivos configurados dentro de `src/` (`.astro`, `.ts`, `.css`)       |
+| `npm run format:check` | Comprueba el formato de código con Prettier únicamente sobre los archivos configurados dentro de `src/`      |
+| `npm run build`        | Compila la versión estática de producción en la carpeta `./dist/`                                            |
+| `npm run preview`      | Previsualiza el build de producción localmente                                                               |
 
 ---
 
@@ -59,7 +59,7 @@ Todos los comandos se ejecutan desde la raíz del proyecto en la terminal:
 │   │   ├── Process.astro        # Proceso simple en 3 pasos
 │   │   ├── About.astro          # Presentación personal de Gisella y valores
 │   │   ├── Faq.astro            # Preguntas frecuentes con acordeón nativo <details>
-│   │   ├── ContactForm.astro    # Formulario estático con validación accesible y Netlify Forms
+│   │   ├── ContactForm.astro    # Formulario accesible conectado a /api/contacto
 │   │   ├── FinalCta.astro       # Llamado a la acción de cierre
 │   │   ├── Footer.astro         # Pie de página legal y enlaces de contacto
 │   │   ├── RouteLine.astro      # Línea SVG decorativa de ruta con progreso de lectura
@@ -80,6 +80,8 @@ Todos los comandos se ejecutan desde la raíz del proyecto en la terminal:
 │   └── styles/
 │       ├── tokens.css           # Paleta cromática, tipografías y escalas de espaciado
 │       └── global.css           # Reset CSS, estilos globales y accesibilidad (WCAG foco y reduced-motion)
+├── netlify/functions/
+│   └── contacto.ts              # Validación del formulario y envío mediante Resend
 ├── astro.config.mjs             # Configuración de Astro, trailingSlash y sitemap
 └── netlify.toml                 # Configuración de build y cabeceras de seguridad en Netlify
 ```
@@ -89,27 +91,34 @@ Todos los comandos se ejecutan desde la raíz del proyecto en la terminal:
 ## ✏️ Cómo Editar y Actualizar Contenidos
 
 ### 1. Datos comerciales y de contacto
+
 Edite el archivo [`src/config/business.ts`](src/config/business.ts):
+
 - Teléfono y WhatsApp (`phoneDisplay`, `phoneRaw`)
 - Correo electrónico (`email`)
 - Enlace de Instagram (`instagram`, `instagramUrl`)
 - Nombre de la profesional y eslogan
 
 ### 2. Servicios
+
 Edite [`src/data/services.ts`](src/data/services.ts):
+
 - Puede agregar, modificar o quitar servicios.
 - Cada ítem define si es destacado (`featured: true`), su descripción breve y el mensaje precargado de WhatsApp (`waParam`).
 
 ### 3. Preguntas Frecuentes
+
 Edite [`src/data/faq.ts`](src/data/faq.ts):
+
 - Agregue o modifique preguntas y respuestas según las consultas más habituales de los clientes.
 
 ### 4. Fotografías
+
 Las imágenes se encuentran en [`src/assets/photos/`](src/assets/photos/). Al reemplazarlas por archivos de alta resolución limpios (sin marca de agua previa), conserve los mismos nombres o actualice las importaciones en `Hero.astro` y `About.astro`.
 
 ---
 
-## ☁️ Despliegue en Netlify y Configuración de Formularios
+## ☁️ Despliegue en Netlify y configuración del formulario
 
 El repositorio incluye el archivo [`netlify.toml`](netlify.toml) preconfigurado:
 
@@ -117,17 +126,19 @@ El repositorio incluye el archivo [`netlify.toml`](netlify.toml) preconfigurado:
 2. Netlify detectará automáticamente:
    - **Build command:** `npm run build`
    - **Publish directory:** `dist`
-3. **Activar notificaciones por email de Netlify Forms:**
-   - En el panel de Netlify, ir a: **Site configuration > Forms > Form notifications**.
-   - Añadir una notificación de tipo **Email notification**.
-   - Ingresar el correo destinatario: `info.gestoriags@gmail.com`.
-   - Seleccionar el formulario `consulta-gestoria`.
+3. **Configurar Resend:**
+   - Añadir `gestoriags.com.ar` en **Resend > Domains**.
+   - Publicar en DNS los registros SPF y DKIM indicados por Resend y esperar el estado `Verified`.
+   - Crear una API key con permiso de envío para ese dominio.
+   - Configurar en Netlify las variables `RESEND_API_KEY`, `RESEND_FROM_EMAIL` y `CONTACT_RECIPIENT_EMAIL` usando `.env.example` como referencia.
+   - El remitente de `RESEND_FROM_EMAIL` debe pertenecer al dominio verificado, por ejemplo `Gestoría GS <consultas@gestoriags.com.ar>`.
 4. **Dominio personalizado:**
    - Configurar el dominio definitivo (ej. `gestoriags.com.ar`) en **Domain management** y emitir el certificado SSL/TLS gratuito de Let's Encrypt provisto por Netlify.
 5. **Prueba de validación en producción:**
    - Una vez desplegado, enviar un formulario real desde el sitio en producción.
    - Verificar la redirección inmediata a `/gracias/`.
    - Confirmar la llegada de la notificación por correo en la casilla `info.gestoriags@gmail.com`.
+   - Si se prueba localmente, usar `npx netlify dev`; `npm run dev` sirve la interfaz de Astro pero no emula la función serverless ni el redirect de Netlify.
 
 ---
 

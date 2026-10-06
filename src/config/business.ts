@@ -7,7 +7,7 @@ export const BUSINESS = {
   name: 'Gisella Suárez · Gestoría GS',
   shortName: 'Gestoría GS',
   personName: 'Gisella Suárez',
-  tagline: 'Gestoría del automotor en Córdoba',
+  tagline: 'Gestión integral del automotor en Córdoba',
   slogan: 'Tu trámite automotor, claro y sin vueltas.',
   phoneDisplay:
     (import.meta.env.PUBLIC_PHONE_DISPLAY as string) || '+54 9 351 375-0475',
@@ -24,7 +24,7 @@ export const BUSINESS = {
   siteUrl:
     (import.meta.env.PUBLIC_SITE_URL as string) || 'https://gestoriags.com.ar',
   metaDescription:
-    'Gestoría del automotor en Córdoba. Transferencias, informes de dominio, verificación policial y trámites de autos y motos con atención personalizada y sin vueltas.',
+    'Gestoría del automotor en Córdoba. Transferencias, informes de dominio, verificación policial y soluciones vehiculares con atención personalizada y sin vueltas.',
   values: [
     'Seriedad',
     'Compromiso',

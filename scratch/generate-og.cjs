@@ -60,7 +60,7 @@ async function createOgImage() {
             letter-spacing="3" fill="#93C5E8">GISELLA SUÁREZ</text>
 
       <text x="195" y="126" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" 
-            letter-spacing="1" fill="#C9D6E4">GESTORÍA DEL AUTOMOTOR</text>
+            letter-spacing="1" fill="#C9D6E4">GESTIÓN INTEGRAL DEL AUTOMOTOR</text>
 
       <!-- Main Headline: Gestoría GS -->
       <text x="80" y="240" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="800" 
@@ -72,7 +72,7 @@ async function createOgImage() {
 
       <!-- Description / City reference -->
       <text x="80" y="350" font-family="system-ui, -apple-system, sans-serif" font-size="19" font-weight="500" 
-            fill="#C9D6E4">Atención personalizada en Córdoba · Autos y motos</text>
+            fill="#C9D6E4">Soluciones vehiculares en Córdoba</text>
 
       <!-- Feature Pills -->
       <g transform="translate(80, 400)">
@@ -106,9 +106,11 @@ async function createOgImage() {
       width,
       height,
       channels: 3,
-      background: '#07172F'
-    }
-  }).png().toBuffer();
+      background: '#07172F',
+    },
+  })
+    .png()
+    .toBuffer();
 
   // Composite portrait on the right (left = 1200 - 502 = 698)
   // Monogram at left: 80, top: 62
@@ -118,18 +120,18 @@ async function createOgImage() {
       {
         input: portraitCropped,
         left: 698,
-        top: 0
+        top: 0,
       },
       {
         input: monogram,
         left: 80,
-        top: 66
+        top: 66,
       },
       {
         input: svgOverlay,
         left: 0,
-        top: 0
-      }
+        top: 0,
+      },
     ])
     .jpeg({ quality: 90, mozjpeg: true })
     .toFile('public/img/gisella-social.jpg');

@@ -24,6 +24,16 @@ function escapeHtml(str: string): string {
     .replace(/'/g, '&#039;');
 }
 
+function getWhatsAppNumber(value: string): string {
+  const digits = value.replace(/\D/g, '');
+
+  if (digits.startsWith('549')) return digits;
+  if (digits.startsWith('54')) return `549${digits.slice(2)}`;
+  if (digits.startsWith('9') && digits.length === 11) return `54${digits}`;
+
+  return `549${digits}`;
+}
+
 export default async (req: Request, _context: Context): Promise<Response> => {
   // Solo permitir solicitudes POST
   if (req.method !== 'POST') {
@@ -161,7 +171,7 @@ export default async (req: Request, _context: Context): Promise<Response> => {
     timeStyle: 'short',
   });
 
-  const whatsappHref = `https://wa.me/549${digits}`;
+  const whatsappHref = `https://wa.me/${getWhatsAppNumber(telefono)}`;
 
   const htmlContent = `
 <!DOCTYPE html>
@@ -174,7 +184,7 @@ export default async (req: Request, _context: Context): Promise<Response> => {
   <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
     <div style="background-color: #0b1a2e; padding: 28px 32px; color: #ffffff;">
       <h1 style="margin: 0 0 6px; font-size: 20px; font-weight: 700; color: #ffffff;">Nueva Consulta Web</h1>
-      <p style="margin: 0; font-size: 14px; color: #93c5fd;">Gestoría GS · Trámites del Automotor en Córdoba</p>
+      <p style="margin: 0; font-size: 14px; color: #93c5fd;">Gestoría GS · Gestión integral del automotor en Córdoba</p>
     </div>
     
     <div style="padding: 32px;">

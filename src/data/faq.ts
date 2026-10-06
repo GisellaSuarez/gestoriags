@@ -5,9 +5,9 @@ export interface FaqItem {
 
 export const FAQS: FaqItem[] = [
   {
-    question: '¿Hacés trámites de autos y de motos?',
+    question: '¿Qué tipo de vehículos gestionás?',
     answer:
-      'Sí, gestiono trámites de autos y de motos. Contame qué vehículo tenés y qué necesitás hacer.',
+      'Gestiono trámites para autos, motos, camiones, tractores y otros vehículos. Contame qué vehículo tenés y qué necesitás hacer.',
   },
   {
     question: '¿Cuánto cuesta un trámite?',

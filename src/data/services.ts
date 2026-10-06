@@ -34,7 +34,7 @@ export const SERVICES: ServiceItem[] = [
     number: '03',
     title: 'Verificación policial',
     description:
-      'La piden varios trámites de autos y motos. Te oriento sobre cuándo corresponde y qué preparar antes de ir.',
+      'La piden distintos trámites vehiculares. Te oriento sobre cuándo corresponde y qué preparar antes de ir.',
     featured: false,
     waParam: 'Verificación policial',
   },
@@ -77,10 +77,10 @@ export const SERVICES: ServiceItem[] = [
   {
     id: 'documentacion-vehicular',
     number: '08',
-    title: 'Documentación de autos y motos',
+    title: 'Documentación vehicular',
     description:
       'Cédulas, duplicados y otros papeles del vehículo. Si no sabés por dónde empezar, contame y vemos qué te falta.',
     featured: false,
-    waParam: 'Documentación de mi vehículo',
+    waParam: 'Documentación vehicular',
   },
 ];
