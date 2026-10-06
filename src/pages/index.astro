@@ -27,6 +27,16 @@ import RouteLine from '../components/RouteLine.astro';
   </main>
 </BaseLayout>
 
+<script>
+  import { initMotion } from '../scripts/motion';
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMotion);
+  } else {
+    initMotion();
+  }
+</script>
+
 <style>
   .main-wrapper {
     position: relative;
