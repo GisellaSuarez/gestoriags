@@ -2,8 +2,11 @@ import { animate, inView, scroll, stagger } from 'motion';
 
 /**
  * Orquestación de animaciones con Motion para Gestoría GS.
- * Diseñado con criterios de sobriedad profesional, accesibilidad estricta
- * y cero layout shift (transform + opacity con aceleración por GPU).
+ * Ajustado con cadencia visible, fluida y cinematográfica:
+ * - Curva de desaceleración tipo iOS/Apple [0.16, 1, 0.3, 1].
+ * - Desplazamientos aumentados (24px a 36px) para que el movimiento sea claramente perceptible.
+ * - Duraciones calibradas (~0.75s - 0.95s) para brindar presencia sin demorar la interacción.
+ * - Aceleración completa por GPU (transform + opacity).
  */
 export function initMotion() {
   if (
@@ -40,10 +43,11 @@ function initScrollProgress() {
 }
 
 /**
- * Entrada elegante y escalonada de los elementos clave del Hero.
+ * Entrada fluida y claramente perceptible de los elementos clave del Hero.
  */
 function animateHeroEntrance() {
-  const customEase = [0.22, 1, 0.36, 1] as const;
+  // Curva de desaceleración fluida y expresiva
+  const fluidEase = [0.16, 1, 0.3, 1] as const;
 
   const eyebrow = document.querySelector('.hero-eyebrow');
   const title = document.querySelector('.hero-title');
@@ -56,35 +60,35 @@ function animateHeroEntrance() {
   if (eyebrow) {
     animate(
       eyebrow,
-      { opacity: [0, 1], transform: ['translateY(12px)', 'translateY(0px)'] },
-      { duration: 0.5, delay: 0.08, ease: customEase }
+      { opacity: [0, 1], transform: ['translateY(16px)', 'translateY(0px)'] },
+      { duration: 0.65, delay: 0.1, ease: fluidEase }
     );
   }
 
   if (title) {
     animate(
       title,
-      { opacity: [0, 1], transform: ['translateY(24px)', 'translateY(0px)'] },
-      { duration: 0.7, delay: 0.16, ease: customEase }
+      { opacity: [0, 1], transform: ['translateY(32px)', 'translateY(0px)'] },
+      { duration: 0.9, delay: 0.2, ease: fluidEase }
     );
   }
 
   if (desc) {
     animate(
       desc,
-      { opacity: [0, 1], transform: ['translateY(16px)', 'translateY(0px)'] },
-      { duration: 0.6, delay: 0.28, ease: customEase }
+      { opacity: [0, 1], transform: ['translateY(24px)', 'translateY(0px)'] },
+      { duration: 0.8, delay: 0.35, ease: fluidEase }
     );
   }
 
   if (actionButtons.length > 0) {
     animate(
       actionButtons,
-      { opacity: [0, 1], transform: ['translateY(16px)', 'translateY(0px)'] },
+      { opacity: [0, 1], transform: ['translateY(22px)', 'translateY(0px)'] },
       {
-        duration: 0.55,
-        delay: stagger(0.1, { startDelay: 0.38 }),
-        ease: customEase,
+        duration: 0.75,
+        delay: stagger(0.12, { startDelay: 0.48 }),
+        ease: fluidEase,
       }
     );
   }
@@ -92,16 +96,19 @@ function animateHeroEntrance() {
   if (proof) {
     animate(
       proof,
-      { opacity: [0, 1], transform: ['translateY(10px)', 'translateY(0px)'] },
-      { duration: 0.6, delay: 0.55, ease: 'easeOut' }
+      { opacity: [0, 1], transform: ['translateY(14px)', 'translateY(0px)'] },
+      { duration: 0.75, delay: 0.7, ease: 'easeOut' }
     );
   }
 
   if (heroImg) {
     animate(
       heroImg,
-      { opacity: [0, 1], transform: ['scale(0.96)', 'scale(1)'] },
-      { duration: 0.85, delay: 0.2, ease: customEase }
+      {
+        opacity: [0, 1],
+        transform: ['scale(0.92) translateY(20px)', 'scale(1) translateY(0px)'],
+      },
+      { duration: 1.05, delay: 0.25, ease: fluidEase }
     );
   }
 
@@ -110,9 +117,9 @@ function animateHeroEntrance() {
       heroBadge,
       {
         opacity: [0, 1],
-        transform: ['scale(0.7) rotate(-8deg)', 'scale(1) rotate(0deg)'],
+        transform: ['scale(0.65) rotate(-14deg)', 'scale(1) rotate(0deg)'],
       },
-      { duration: 0.75, delay: 0.45, ease: [0.34, 1.56, 0.64, 1] }
+      { duration: 0.9, delay: 0.55, ease: [0.34, 1.56, 0.64, 1] }
     );
   }
 }
@@ -123,7 +130,7 @@ function animateHeroEntrance() {
  */
 function setupScrollReveals() {
   const animatedElements = new WeakSet<Element>();
-  const customEase = [0.22, 1, 0.36, 1] as const;
+  const fluidEase = [0.16, 1, 0.3, 1] as const;
 
   // --- Barra de confianza (Trust Bar) ---
   const trustBar = document.querySelector('.trust-bar');
@@ -139,16 +146,16 @@ function setupScrollReveals() {
           trustItems,
           {
             opacity: [0, 1],
-            transform: ['translateY(20px)', 'translateY(0px)'],
+            transform: ['translateY(28px)', 'translateY(0px)'],
           },
           {
-            duration: 0.55,
-            delay: stagger(0.12),
-            ease: customEase,
+            duration: 0.8,
+            delay: stagger(0.15),
+            ease: fluidEase,
           }
         );
       },
-      { amount: 0.2 }
+      { amount: 0.15 }
     );
   }
 
@@ -165,12 +172,12 @@ function setupScrollReveals() {
           target,
           {
             opacity: [0, 1],
-            transform: ['translateY(24px)', 'translateY(0px)'],
+            transform: ['translateY(32px)', 'translateY(0px)'],
           },
-          { duration: 0.6, ease: customEase }
+          { duration: 0.85, ease: fluidEase }
         );
       },
-      { amount: 0.25 }
+      { amount: 0.15 }
     );
   }
 
@@ -187,16 +194,16 @@ function setupScrollReveals() {
           featuredCards,
           {
             opacity: [0, 1],
-            transform: ['translateY(28px)', 'translateY(0px)'],
+            transform: ['translateY(36px)', 'translateY(0px)'],
           },
           {
-            duration: 0.65,
-            delay: stagger(0.15),
-            ease: customEase,
+            duration: 0.9,
+            delay: stagger(0.18),
+            ease: fluidEase,
           }
         );
       },
-      { amount: 0.2 }
+      { amount: 0.15 }
     );
   }
 
@@ -213,12 +220,12 @@ function setupScrollReveals() {
           listCards,
           {
             opacity: [0, 1],
-            transform: ['translateY(18px)', 'translateY(0px)'],
+            transform: ['translateY(24px)', 'translateY(0px)'],
           },
           {
-            duration: 0.5,
-            delay: stagger(0.08),
-            ease: customEase,
+            duration: 0.75,
+            delay: stagger(0.1),
+            ease: fluidEase,
           }
         );
       },
@@ -239,12 +246,12 @@ function setupScrollReveals() {
           target,
           {
             opacity: [0, 1],
-            transform: ['translateY(22px)', 'translateY(0px)'],
+            transform: ['translateY(30px)', 'translateY(0px)'],
           },
-          { duration: 0.6, ease: customEase }
+          { duration: 0.85, ease: fluidEase }
         );
       },
-      { amount: 0.2 }
+      { amount: 0.15 }
     );
   }
 
@@ -261,12 +268,12 @@ function setupScrollReveals() {
           benefitItems,
           {
             opacity: [0, 1],
-            transform: ['translateX(-18px)', 'translateX(0px)'],
+            transform: ['translateX(-28px)', 'translateX(0px)'],
           },
           {
-            duration: 0.55,
-            delay: stagger(0.09),
-            ease: customEase,
+            duration: 0.8,
+            delay: stagger(0.12),
+            ease: fluidEase,
           }
         );
       },
@@ -287,12 +294,12 @@ function setupScrollReveals() {
           target,
           {
             opacity: [0, 1],
-            transform: ['translateY(20px)', 'translateY(0px)'],
+            transform: ['translateY(28px)', 'translateY(0px)'],
           },
-          { duration: 0.55, ease: customEase }
+          { duration: 0.8, ease: fluidEase }
         );
       },
-      { amount: 0.25 }
+      { amount: 0.2 }
     );
   }
 
@@ -310,12 +317,12 @@ function setupScrollReveals() {
           stepItems,
           {
             opacity: [0, 1],
-            transform: ['translateY(24px)', 'translateY(0px)'],
+            transform: ['translateY(32px)', 'translateY(0px)'],
           },
           {
-            duration: 0.6,
-            delay: stagger(0.14),
-            ease: customEase,
+            duration: 0.85,
+            delay: stagger(0.18),
+            ease: fluidEase,
           }
         );
 
@@ -323,17 +330,17 @@ function setupScrollReveals() {
           animate(
             stepMarkers,
             {
-              transform: ['scale(0.75)', 'scale(1)'],
+              transform: ['scale(0.65)', 'scale(1)'],
             },
             {
-              duration: 0.5,
-              delay: stagger(0.14, { startDelay: 0.1 }),
+              duration: 0.7,
+              delay: stagger(0.18, { startDelay: 0.1 }),
               ease: [0.34, 1.56, 0.64, 1],
             }
           );
         }
       },
-      { amount: 0.2 }
+      { amount: 0.15 }
     );
   }
 
@@ -350,12 +357,15 @@ function setupScrollReveals() {
           target,
           {
             opacity: [0, 1],
-            transform: ['scale(0.95)', 'scale(1)'],
+            transform: [
+              'scale(0.92) translateY(24px)',
+              'scale(1) translateY(0px)',
+            ],
           },
-          { duration: 0.7, ease: customEase }
+          { duration: 0.95, ease: fluidEase }
         );
       },
-      { amount: 0.25 }
+      { amount: 0.2 }
     );
   }
 
@@ -372,9 +382,9 @@ function setupScrollReveals() {
           target,
           {
             opacity: [0, 1],
-            transform: ['translateY(22px)', 'translateY(0px)'],
+            transform: ['translateY(30px)', 'translateY(0px)'],
           },
-          { duration: 0.6, ease: customEase }
+          { duration: 0.85, ease: fluidEase }
         );
 
         if (valuePills.length > 0) {
@@ -382,17 +392,20 @@ function setupScrollReveals() {
             valuePills,
             {
               opacity: [0, 1],
-              transform: ['scale(0.85)', 'scale(1)'],
+              transform: [
+                'scale(0.75) translateY(10px)',
+                'scale(1) translateY(0px)',
+              ],
             },
             {
-              duration: 0.45,
-              delay: stagger(0.06, { startDelay: 0.2 }),
-              ease: customEase,
+              duration: 0.6,
+              delay: stagger(0.08, { startDelay: 0.25 }),
+              ease: fluidEase,
             }
           );
         }
       },
-      { amount: 0.25 }
+      { amount: 0.2 }
     );
   }
 
@@ -409,12 +422,12 @@ function setupScrollReveals() {
           target,
           {
             opacity: [0, 1],
-            transform: ['translateY(20px)', 'translateY(0px)'],
+            transform: ['translateY(28px)', 'translateY(0px)'],
           },
-          { duration: 0.55, ease: customEase }
+          { duration: 0.8, ease: fluidEase }
         );
       },
-      { amount: 0.25 }
+      { amount: 0.2 }
     );
   }
 
@@ -431,12 +444,12 @@ function setupScrollReveals() {
           faqItems,
           {
             opacity: [0, 1],
-            transform: ['translateY(16px)', 'translateY(0px)'],
+            transform: ['translateY(22px)', 'translateY(0px)'],
           },
           {
-            duration: 0.5,
-            delay: stagger(0.07),
-            ease: customEase,
+            duration: 0.7,
+            delay: stagger(0.09),
+            ease: fluidEase,
           }
         );
       },
@@ -457,12 +470,12 @@ function setupScrollReveals() {
           target,
           {
             opacity: [0, 1],
-            transform: ['translateY(22px)', 'translateY(0px)'],
+            transform: ['translateY(30px)', 'translateY(0px)'],
           },
-          { duration: 0.6, ease: customEase }
+          { duration: 0.85, ease: fluidEase }
         );
       },
-      { amount: 0.2 }
+      { amount: 0.15 }
     );
   }
 
@@ -478,9 +491,9 @@ function setupScrollReveals() {
           target,
           {
             opacity: [0, 1],
-            transform: ['translateY(26px)', 'translateY(0px)'],
+            transform: ['translateY(36px)', 'translateY(0px)'],
           },
-          { duration: 0.65, delay: 0.1, ease: customEase }
+          { duration: 0.95, delay: 0.1, ease: fluidEase }
         );
       },
       { amount: 0.15 }
@@ -500,12 +513,12 @@ function setupScrollReveals() {
           target,
           {
             opacity: [0, 1],
-            transform: ['translateY(20px)', 'translateY(0px)'],
+            transform: ['translateY(28px)', 'translateY(0px)'],
           },
-          { duration: 0.6, ease: customEase }
+          { duration: 0.85, ease: fluidEase }
         );
       },
-      { amount: 0.25 }
+      { amount: 0.2 }
     );
   }
 
@@ -521,12 +534,15 @@ function setupScrollReveals() {
           target,
           {
             opacity: [0, 1],
-            transform: ['scale(0.92)', 'scale(1)'],
+            transform: [
+              'scale(0.88) translateY(14px)',
+              'scale(1) translateY(0px)',
+            ],
           },
-          { duration: 0.5, delay: 0.15, ease: [0.34, 1.56, 0.64, 1] }
+          { duration: 0.75, delay: 0.2, ease: [0.34, 1.56, 0.64, 1] }
         );
       },
-      { amount: 0.25 }
+      { amount: 0.2 }
     );
   }
 }
@@ -550,7 +566,7 @@ function setupMicroInteractions() {
             ? ['rotate(0deg)', 'rotate(45deg)']
             : ['rotate(45deg)', 'rotate(0deg)'],
         },
-        { duration: 0.22, ease: 'easeOut' }
+        { duration: 0.28, ease: 'easeOut' }
       );
     });
   });
@@ -564,8 +580,8 @@ function setupMicroInteractions() {
     btn.addEventListener('mouseenter', () => {
       animate(
         btn,
-        { transform: 'translateY(-2px)' },
-        { duration: 0.2, ease: 'easeOut' }
+        { transform: 'translateY(-3px)' },
+        { duration: 0.25, ease: 'easeOut' }
       );
     });
 
@@ -573,7 +589,7 @@ function setupMicroInteractions() {
       animate(
         btn,
         { transform: 'translateY(0px)' },
-        { duration: 0.2, ease: 'easeOut' }
+        { duration: 0.25, ease: 'easeOut' }
       );
     });
   });
@@ -586,8 +602,8 @@ function setupMicroInteractions() {
     card.addEventListener('mouseenter', () => {
       animate(
         card,
-        { transform: 'translateY(-3px)' },
-        { duration: 0.25, ease: 'easeOut' }
+        { transform: 'translateY(-4px)' },
+        { duration: 0.3, ease: 'easeOut' }
       );
     });
 
@@ -595,7 +611,7 @@ function setupMicroInteractions() {
       animate(
         card,
         { transform: 'translateY(0px)' },
-        { duration: 0.25, ease: 'easeOut' }
+        { duration: 0.3, ease: 'easeOut' }
       );
     });
   });
