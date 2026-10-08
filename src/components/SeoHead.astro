@@ -21,6 +21,11 @@ const canonicalUrl = new URL(
 );
 const ogImageUrl = new URL(image, Astro.site || BUSINESS.siteUrl);
 
+// Token opcional de Google Search Console (propiedad de prefijo de URL).
+// Si la propiedad se verifica por DNS (TXT), no hace falta definirlo.
+const googleSiteVerification = import.meta.env
+  .PUBLIC_GOOGLE_SITE_VERIFICATION as string | undefined;
+
 // Emitir schema comercial ProfessionalService únicamente en la portada
 const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 
@@ -29,12 +34,23 @@ const jsonLd = isHome
       '@context': 'https://schema.org',
       '@graph': [
         {
+          // Permite a Google mostrar "Gestoría GS" como nombre del sitio
+          '@type': 'WebSite',
+          '@id': `${BUSINESS.siteUrl}/#website`,
+          name: BUSINESS.shortName,
+          alternateName: [BUSINESS.name, 'Gestoría GS Córdoba'],
+          url: `${BUSINESS.siteUrl}/`,
+          inLanguage: 'es-AR',
+          publisher: { '@id': `${BUSINESS.siteUrl}/#business` },
+        },
+        {
           '@type': 'ProfessionalService',
           '@id': `${BUSINESS.siteUrl}/#business`,
           name: BUSINESS.name,
+          alternateName: BUSINESS.shortName,
           description: description,
-          url: BUSINESS.siteUrl,
-          telephone: BUSINESS.phoneDisplay,
+          url: `${BUSINESS.siteUrl}/`,
+          telephone: `+${BUSINESS.phoneRaw}`,
           email: BUSINESS.email,
           areaServed: {
             '@type': 'AdministrativeArea',
@@ -42,6 +58,10 @@ const jsonLd = isHome
           },
           sameAs: [BUSINESS.instagramUrl],
           image: ogImageUrl.toString(),
+          logo: new URL(
+            '/brand/gs-monograma.png',
+            Astro.site || BUSINESS.siteUrl
+          ).toString(),
         },
         {
           '@type': 'Person',
@@ -69,6 +89,11 @@ const jsonLd = isHome
 <link rel="icon" type="image/png" href="/brand/gs-monograma.png" />
 
 {noindex && <meta name="robots" content="noindex, nofollow" />}
+{
+  googleSiteVerification && (
+    <meta name="google-site-verification" content={googleSiteVerification} />
+  )
+}
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
